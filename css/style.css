@@ -189,9 +189,10 @@ body {
         margin-left: -30px;
     }
 
-    #randomProductImage{
-       
-    }
+   .team-item{
+    width: 180%;
+    margin-left: -66px;
+   }
 
     .header-carousel .owl-carousel-item img {
         position: absolute;
