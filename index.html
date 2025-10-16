@@ -98,12 +98,36 @@
                         <a href="404.html" class="dropdown-item">404 Page</a>
                     </div>
                 </div> -->
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="contact.html" class="nav-item nav-link">Our Blog</a>
             </div>
             
-            <a href="" class="btn btn-primary  py-4 px-lg-5 d-none d-lg-block"  >Contact us<i class="fa fa-arrow-right ms-3"></i></a>
+            <a href="" class="btn btn-primary  py-4 px-lg-5 d-none d-lg-block"  >CONTACT US<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
+
+    <!-- Progress Bar Start -->
+    <style>
+        #scrollProgressBar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 5px;
+            z-index: 9999;
+            background: linear-gradient(90deg, #32C36C 0%, #1128B3 100%);
+            transition: width 0.2s;
+        }
+    </style>
+    <div id="scrollProgressBar"></div>
+    <script>
+        window.addEventListener('scroll', function() {
+            var scrollTop = window.scrollY || document.documentElement.scrollTop;
+            var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            var scrolled = (scrollTop / docHeight) * 100;
+            document.getElementById('scrollProgressBar').style.width = scrolled + '%';
+        });
+    </script>
+    <!-- Progress Bar End -->
     <!-- Navbar End -->
     <!-- Login Link in Navbar -->
  
@@ -161,19 +185,20 @@
     <div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="owl-carousel header-carousel position-relative">
             <div class="owl-carousel-item position-relative" data-dot="<img src='img/g-2.png'>">
-                              <img class="img-fluid w-100" src="img/last-bg.png" alt="E-agriculture" style=" object-fit:cover; height: 100vh; " >
+                            <picture>
+                                <source media="(max-width: 767px)" srcset="img/smallscreen.png">
+                                <img class="img-fluid w-100" src="img/last-bg.png" alt="E-agriculture" style="object-fit:cover; height: 100vh;">
+                            </picture>
                 <!-- Overlay -->
 
                 <div class="owl-carousel-inner position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="z-index:2;">
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
-                                <h1 class="display-2 text-white animated slideInDown" id="autoTypeHeading"></h1>
+                                <h1 class="display-2 text-white animated slideInDown" id="autoTypeHeading">E-Government solutions to transform public service. </h1>
+                              
                              
-                                <p class="fs-5 fw-medium-2 text-white mb-4 pb-3"> Empowering healthcare with innovative digital solutions. We help organizations implement secure, efficient,
-                                     and user-friendly e-health systems for better patient outcomes and streamlined operations.
-                                     Empowering healthcare with innovative digital solutions. We help organizations implement secure, efficient,
-                                      and user-friendly e-health systems for better patient outcomes and streamlined operations.</p>
+                      
                                 <!-- <a href="" class="btn btn-primary  py-3 px-5 animated slideInLeft">Read More</a> -->
                                  
                             </div>
@@ -182,25 +207,23 @@
                 </div>
             </div>
             <div class="owl-carousel-item position-relative" data-dot="<img src='img/agri.png'>">
-                <img class="img-fluid w-100" src="img/agri.png" alt="E-agriculture" style="object-fit:cover; height: 100vh;">
+                    <picture>
+                                <source media="(max-width: 767px)" srcset="img/ssssmmm.png">
+                                <img class="img-fluid w-100" src="img/agri.png" alt="E-agriculture" style="object-fit:cover; height: 100vh;">
+                            </picture>
               
 
                 <div class="owl-carousel-inner position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="z-index:2;">
                     <div class="container">
                         <div class="row justify-content-start">
-                            <div class="col-10 col-lg-8">
-                                <h1 class="display-2 text-white animated slideInDown">E-agriculture</h1>
-                                <p class="fs-5 fw-medium-2 text-white mb-4 pb-3">
-                                    Our e-agriculture solution is designed to revolutionize the agricultural
-                                     sector by leveraging cutting-edge digital technologies to empower farmers,
-                                      agribusinesses, and government agencies. At its core, our platform integrates 
-                                      data-driven decision-making, real-time information dissemination, and seamless 
-                                      collaboration across the agricultural value chain, ensuring increased productivity,
-                                       sustainability, and profitability for all stakeholders.
-
-                                    
-                                </p>
-                                <a href="" class="btn btn-primary  py-3 px-5 animated slideInLeft">Read More</a>
+                       <div class="col-10 col-lg-8">
+                                <h1 class="display-2 text-white animated slideInDown" id="autoTypeHeading">E-Health</h1>
+                             
+                                <p class="fs-5 fw-medium-2 text-white mb-4 pb-3"> Empowering healthcare with innovative digital solutions. We help organizations implement secure, efficient,
+                                     and user-friendly e-health systems for better patient outcomes and streamlined operations.
+                                     Empowering healthcare with innovative digital solutions. </p>
+                                <!-- <a href="" class="btn btn-primary  py-3 px-5 animated slideInLeft">Read More</a> -->
+                                 
                             </div>
                         </div>
                     </div>
@@ -466,7 +489,7 @@
             <div class="row g-4 ">
                 <!-- E-Government -->
                 <div class="col-md-6 col-lg-3 col-sm-2 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="card  service-card border-0 border-start border-2 h-100 text-center" style="border-color: #56bc6d !important;">
+                    <div class="card  service-card border-0 border-start border-2 h-100 text-center" >
                         <div class="card-body px-4 py-5">
                             <div class="mb-4">
                                 <i class="fa fa-university fa-3x text-primary"></i>
@@ -496,7 +519,7 @@
                 </div>
                 <!-- E-Agriculture -->
                 <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="card border-0  service-card border-start border-2 h-100 text-center" style="border-color: #56bc6d !important;">
+                    <div class="card border-0  service-card border-start border-2 h-100 text-center" >
                         <div class="card-body px-4 py-5">
                             <div class="mb-4">
                                 <i class="fa fa-leaf fa-3x text-primary"></i>
@@ -511,7 +534,7 @@
                 </div>
                 <!-- Digital Transformation Consulting -->
                 <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.4s">
-                    <div class="card border-0  service-card border-start border-2 h-100 text-center" style="border-color: #56bc6d !important;">
+                    <div class="card border-0  service-card border-start border-2 h-100 text-center" >
                         <div class="card-body px-4 py-5">
                             <div class="mb-4">
                                 <i class="fa fa-lightbulb fa-3x text-primary"></i>
@@ -736,7 +759,7 @@
                     <p class="lead text-white mb-5" style="font-size:1rem; font-weight:200;">
                         Partner with Now or Never LTD to unlock digital transformation, expert consulting, and impactful technology for your organization’s growth and success.
                     </p>
-                    <a href="" class="btn btn-primary py-3 px-5 animated slideInLeft">Contact Us Today</a>
+                    <a href="" class="btn btn-primary py-3 px-5 animated slideInLeft">Contact us Today</a>
                 </div>
 
                 </div>
