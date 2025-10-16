@@ -183,6 +183,15 @@ body {
     .display-2{
         font-size: 35px !important;
     }
+    .service-card{
+        width: 120%;
+        justify-content: center;
+        margin-left: -30px;
+    }
+
+    #randomProductImage{
+       
+    }
 
     .header-carousel .owl-carousel-item img {
         position: absolute;
