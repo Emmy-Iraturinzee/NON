@@ -165,20 +165,33 @@ body {
     display: flex;
     align-items: center;
  
-     margin-top: -50px;
+     margin-top: 10px;
 }
 
 @media (max-width: 768px) {
     .header-carousel .owl-carousel-item {
         position: relative;
-        min-height: 500px;
+        min-height: 700px;
     }
     .owl-carousel-inner {
-        margin-top: 270px !important;
+       
+     margin-top: 100px;
+    }
+    .team-counter{
+        margin-left: 20px!important;
+    }
+    .owl-carousel-inner-vid{
+        margin-top: 10px!important;
+    }
+    #autoTypeHeading{
+        font-size: 35px;
     }
     .e-health{
           margin-top: -120px !important;
 
+    }
+    .overlay-hero{
+        display: none;
     }
     .display-2{
         font-size: 35px !important;
@@ -187,6 +200,9 @@ body {
         width: 120%;
         justify-content: center;
         margin-left: -30px;
+    }
+    .woman-img-hero{
+        display: none !important;
     }
 
    .team-item{
@@ -220,18 +236,19 @@ body {
 
 .header-carousel .owl-dots .owl-dot {
     position: relative;
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
     margin: 5px 0;
     background: #FFFFFF;
-    box-shadow: 0 0 30px rgba(255, 255, 255, .9);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.369);
     border-radius: 45px;
     transition: .5s;
 }
 
 .header-carousel .owl-dots .owl-dot.active {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
+  
 }
 
 .header-carousel .owl-dots .owl-dot img {
@@ -245,7 +262,7 @@ body {
 }
 
 .page-header {
-    background: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(../img/carousel-1.jpg) center center no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(../img/bababa.png) center center no-repeat;
     background-size: cover;
 }
 
@@ -856,3 +873,15 @@ body {
         display: none;
       }
     }
+
+    /*progress bar  */
+          #scrollProgressBar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 5px;
+            z-index: 9999;
+            background: linear-gradient(90deg, #32C36C 0%, #1128B3 100%);
+            transition: width 0.2s;
+        }

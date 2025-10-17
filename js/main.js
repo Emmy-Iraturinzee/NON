@@ -28,12 +28,24 @@
     
     // Back to top button
     $(window).scroll(function () {
+        // Hide back-to-top on hero section (when at top of page)
         if ($(this).scrollTop() > 300) {
             $('.back-to-top').fadeIn('slow');
         } else {
             $('.back-to-top').fadeOut('slow');
         }
     });
+
+    // Additionally, hide back-to-top if user is on hero section even after resize or load
+    function updateBackToTopVisibility() {
+        if ($(window).scrollTop() > 300) {
+            $('.back-to-top').fadeIn('slow');
+        } else {
+            $('.back-to-top').fadeOut('slow');
+        }
+    }
+    $(window).on('resize load', updateBackToTopVisibility);
+
     $('.back-to-top').click(function () {
         $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
         return false;
@@ -205,3 +217,106 @@
                                     }
                                     type();
                                 });
+
+// Scroll progress bar
+      window.addEventListener('scroll', function() {
+            var scrollTop = window.scrollY || document.documentElement.scrollTop;
+            var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            var scrolled = (scrollTop / docHeight) * 100;
+            document.getElementById('scrollProgressBar').style.width = scrolled + '%';
+        });
+
+        // Particles.js
+
+          
+                document.addEventListener('DOMContentLoaded', function() {
+                    if (window.particlesJS) {
+                        particlesJS("particles-js", {
+                            "particles": {
+                                "number": {
+                                    "value": 60,
+                                    "density": { "enable": true, "value_area": 800 }
+                                },
+                                "color": { "value": "#8fffb1" },
+                                "shape": {
+                                    "type": "circle",
+                                    "stroke": { "width": 0, "color": "#000" }
+                                },
+                                "opacity": {
+                                    "value": 0.25,
+                                    "random": true,
+                                    "anim": { "enable": false }
+                                },
+                                "size": {
+                                    "value": 4,
+                                    "random": true,
+                                    "anim": { "enable": false }
+                                },
+                                "line_linked": {
+                                    "enable": true,
+                                    "distance": 120,
+                                    "color": "#8fffb1",
+                                    "opacity": 0.15,
+                                    "width": 1
+                                },
+                                "move": {
+                                    "enable": true,
+                                    "speed": 1.2,
+                                    "direction": "none",
+                                    "random": false,
+                                    "straight": false,
+                                    "out_mode": "out"
+                                }
+                            },
+                            "interactivity": {
+                                "detect_on": "canvas",
+                                "events": {
+                                    "onhover": { "enable": true, "mode": "repulse" },
+                                    "onclick": { "enable": false }
+                                },
+                                "modes": {
+                                    "repulse": { "distance": 120, "duration": 0.6 }
+                                }
+                            },
+                            "retina_detect": true
+                        });
+
+                        // Animate particles on hover of the carousel item
+                        var carouselItem = document.querySelector('.owl-carousel-item');
+                        var particlesCanvas = document.querySelector('#particles-js canvas');
+                        if (carouselItem && particlesCanvas) {
+                            carouselItem.addEventListener('mouseenter', function() {
+                                if (window.pJSDom && pJSDom[0] && pJSDom[0].pJS) {
+                                    pJSDom[0].pJS.interactivity.events.onhover.enable = true;
+                                }
+                            });
+                            carouselItem.addEventListener('mouseleave', function() {
+                                if (window.pJSDom && pJSDom[0] && pJSDom[0].pJS) {
+                                    pJSDom[0].pJS.interactivity.events.onhover.enable = false;
+                                }
+                            });
+                        }
+                    }
+                });
+
+                // Count Up Animation
+                document.addEventListener('DOMContentLoaded', function() {
+                    function animateCountUp(el) {
+                        const target = +el.getAttribute('data-target');
+                        const duration = 1200;
+                        const start = 0;
+                                    const stepTime = Math.max(Math.floor(duration / target), 20);
+                                    let current = start;
+                                    const timer = setInterval(() => {
+                                        current++;
+                                        el.textContent = current + '+';
+                                        if (current >= target) {
+                                            el.textContent = target + '+';
+                                            clearInterval(timer);
+                                        }
+                                    }, stepTime);
+                                }
+                                document.querySelectorAll('.count-up').forEach(animateCountUp);
+                            });
+                        
+               
