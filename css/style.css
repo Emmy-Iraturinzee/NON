@@ -885,3 +885,109 @@ body {
             background: linear-gradient(90deg, #32C36C 0%, #1128B3 100%);
             transition: width 0.2s;
         }
+
+        /* Carousel styles */
+        .products-carousel { position:relative; }
+
+        /* Carousel container styles */
+        .products-carousel-wrap { display:flex; flex-direction:column; gap:28px; }
+
+        /* Wrapper that allows manual scroll and JS auto-scroll */
+        .marquee-wrapper {
+            position:relative;
+            overflow-x:auto;
+            overflow-y:hidden;
+            -webkit-overflow-scrolling:touch;
+            scroll-behavior: auto;
+            padding:18px 8px;
+            cursor:grab;
+            border-radius:14px;
+           
+
+
+            /* hide native scroll indicators while keeping scrolling functional */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE 10+ */
+        }
+
+        /* Hide webkit scrollbars */
+        .marquee-wrapper::-webkit-scrollbar { display: none; }
+
+        /* Track holds cards in a row and will be duplicated by JS */
+        .marquee-track {
+            display:flex;
+            gap:18px;
+            align-items:stretch;
+        }
+
+            /* Card visual */
+            .product-card {
+                min-width:340px;
+                max-width:340px;
+                background: #ffffff;
+                border-radius:14px;
+            
+                padding:30px;
+                display:flex;
+                flex-direction:column;
+                justify-content:space-between;
+                border: 2px solid rgba(6,24,56,0.04);
+                transition: background .25s ease, border-color .25s ease, color .25s ease, transform .2s;
+            }
+
+            /* Hover: make background site green and all text inside the card white */
+            .product-card:hover {
+                background: var(--primary);
+                border-color: var(--primary);
+                color: #ffffff;
+            }
+
+            /* Ensure common text elements and controls inside the card turn white on hover */
+            .product-card:hover h5,
+            .product-card:hover p,
+            .product-card:hover .meta,
+            .product-card:hover a,
+            .product-card:hover .btn,
+            .product-card:hover small,
+            .product-card:hover span,
+            .product-card:hover label {
+                color: #ffffff !important;
+            }
+
+            /* Optional: keep images readable against the green background */
+            .product-card:hover .product-visual {
+                filter: brightness(.95);
+            }
+
+            .product-card h5 { margin:0 0 8px 0; 
+                color:#040405;
+                 font-weight:600;
+                 margin-bottom: 35px;
+               
+                
+                }
+                 
+
+            .product-card p { margin:20 10 12px 0;
+                
+                color:#555; font-size:0.95rem; }
+            .product-card .meta { color:#56bc6d;
+                 font-weight:600;
+                  margin-bottom:8px;
+                text-transform:uppercase;
+                  font-weight: 400;
+                
+                }
+
+            /* Visual image for left section (keeps original layout) */
+            .product-visual { display:block; width:100%; border-radius:12px; height:460px; object-fit:cover; box-shadow: 0 12px 30px rgba(4,12,61,0.12); }
+
+
+        /* Small responsive tweaks */
+        @media (max-width:991px) {
+            .product-card { 
+                width: 100%;
+             }
+            .product-visual { height:320px; }
+        }
+       

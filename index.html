@@ -105,6 +105,88 @@
                     </div>
                 </div> -->
                 <a href="contact.html" class="nav-item nav-link">Our Blog</a>
+                            <!-- Search icon in navbar -->
+                            <a href="#" id="navSearchBtn" class="nav-item nav-link" role="button" aria-label="Open search" style="cursor:pointer;">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </a>
+
+                            <!-- Floating search + overlay (placed inside navbar collapse so it loads with the page) -->
+                            <div id="navSearchOverlay" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,0.6); align-items:center; justify-content:center; padding:20px; box-sizing:border-box;">
+                              <div id="navSearchBox" role="dialog" aria-modal="true" aria-label="Site search"
+                                   style="background:#fff; width:clamp(320px,70%,900px); margin:0 20px; border-radius:10px; padding:18px; box-shadow:0 10px 40px rgba(0,0,0,0.4);">
+                                <div style="display:flex; gap:8px; align-items:center;">
+                                  <input id="navSearchInput" type="search" placeholder="Search the site..." autofocus
+                                         style="flex:1; border:1px solid #e6e6e6; border-radius:8px; padding:12px 14px; font-size:1rem; outline:none;">
+                                  <button id="navSearchSubmit" class="btn btn-primary" style="padding:10px 14px; font-weight:600;">
+                                    <i class="fa fa-search"></i>
+                                  </button>
+                                  <button id="navSearchClose" class="btn btn-light" aria-label="Close search" style="margin-left:6px;">
+                                    <i class="fa fa-times"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+
+                            <script>
+                              (function(){
+                                const openBtn = document.getElementById('navSearchBtn');
+                                const overlay = document.getElementById('navSearchOverlay');
+                                const box = document.getElementById('navSearchBox');
+                                const input = document.getElementById('navSearchInput');
+                                const closeBtn = document.getElementById('navSearchClose');
+
+                                function openSearch(e){
+                                  if(e) e.preventDefault();
+                                  overlay.style.display = 'flex';
+                                  // prevent background scroll
+                                  document.documentElement.style.overflow = 'hidden';
+                                  document.body.style.overflow = 'hidden';
+                                  setTimeout(() => input.focus(), 50);
+                                }
+                                function closeSearch(){
+                                  overlay.style.display = 'none';
+                                  document.documentElement.style.overflow = '';
+                                  document.body.style.overflow = '';
+                                  input.blur();
+                                }
+
+                                openBtn.addEventListener('click', openSearch);
+                                closeBtn.addEventListener('click', closeSearch);
+
+                                // close when clicking outside the box
+                                overlay.addEventListener('click', function(e){
+                                  if (e.target === overlay) closeSearch();
+                                });
+
+                                // Esc to close
+                                document.addEventListener('keydown', function(e){
+                                  if (e.key === 'Escape' && overlay.style.display === 'flex') closeSearch();
+                                  // Enter in input could submit search; this demo prevents default navigation
+                                  if (e.key === 'Enter' && document.activeElement === input) {
+                                    e.preventDefault();
+                                    // TODO: hook up search logic here. For now just log the query and close.
+                                    console.log('Search query:', input.value);
+                                    // optionally closeSearch();
+                                  }
+                                });
+
+                                // Prevent focus trap issues when overlay hidden
+                                overlay.addEventListener('keydown', function(e){
+                                  if (e.key === 'Tab') {
+                                    // keep focus inside the search box (simple focus trap)
+                                    const focusable = Array.from(box.querySelectorAll('input, button, [tabindex]:not([tabindex="-1"])'))
+                                      .filter(el => !el.disabled);
+                                    if (focusable.length === 0) return;
+                                    const first = focusable[0], last = focusable[focusable.length - 1];
+                                    if (e.shiftKey && document.activeElement === first) {
+                                      e.preventDefault(); last.focus();
+                                    } else if (!e.shiftKey && document.activeElement === last) {
+                                      e.preventDefault(); first.focus();
+                                    }
+                                  }
+                                });
+                              })();
+                            </script>
             </div>
             
             <a href="contact.html" class="btn btn-primary  py-4 px-lg-5 d-none d-lg-block" style="font-size: 12px;"  >CONTACT US<i class="fa fa-arrow-right ms-3"></i></a>
@@ -576,7 +658,7 @@
     <div class="container-fluid  overflow-hidden my-5 px-lg-0" style="background: url('img/bababa.png') center center/cover no-repeat; padding: 50px; ">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 700px;">
-                <h6 class="text-primary">Our Services</h6>
+                <h6 class="text-primary">Our Services by Sectors</h6>
                 <h1 class="mb-4 text-white">Digital Solutions for Africa</h1>
                 <p class="lead text-white mb-0">
                     We deliver innovative digital services and consulting to accelerate growth, efficiency, and impact for organizations across Africa.
@@ -657,71 +739,197 @@
 
     <!-- Projects Start -->
 <!-- Products Section Start -->
-    <div class="container-fluid " >
-    <div class="container">
-        <div class="row align-items-center g-5">
-            <!-- Left: Product Visual -->
-            <div class="col-lg-6 text-center text-lg-start">
-                <h6 class="text-primary mb-1">Our Products</h6>
-                <h1 class="fw-bold mb-4" style="color: #000000; font-size: 2.5rem; line-height: 1.1;">
-                    Empowering Change Through<br>Data Innovation
-                </h1>
-                <!-- Random image below h1 -->
-         <img id="randomProductImage" src="img/producta.JPG" alt="Product Visual" class="img-fluid rounded-4 shadow" style="max-width: auto; height: 460px; object-fit: cover;">
-
-            
+    <div class="container-fluid  overflow-hidden my-5 px-lg-0 " >
+    <div class="container ">
+          <div class="mb-4">
+  <h6 class="text-primary">Our Services</h6>
             </div>
-          
-            <!-- Right: Product List -->
-            <div class="col-lg-6">
-                <div class=" rounded-4 p-4 mb-4">
-                    <div class="d-flex align-items-start mb-3">
-                        <span class="" style="font-size:2rem; color:#56bc6d;margin-right: 30px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#56bc6d" width="2em" height="2em" style="display:inline-block;vertical-align:middle;">
-                                <path d="M10.25 3A2.25 2.25 0 0 0 8 5.25V6H6.25A2.25 2.25 0 0 0 4 8.25v2.5h16v-2.5A2.25 2.25 0 0 0 17.75 6H16v-.75A2.25 2.25 0 0 0 13.75 3h-3.5ZM9.5 5.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75V6h-5v-.75ZM20 11.75H4v4A2.25 2.25 0 0 0 6.25 18h11.5A2.25 2.25 0 0 0 20 15.75v-4Z"/>
-                            </svg></svg>
-                        </span>
-                        <div class="mb-1" style="">
-                            <h5 class=" mb-1" style="color:#56bc6d; font-weight: 600; font-size: 18px;">Management Consulting</h5>
-                            <p class="mb-4 text-secondary small">Keeping track of operations, performance, and resources is essential for organizations to thrive in a digital world.</p>
-                            <a href="#" class="fw-bold text-decoration-none" style="color:#000000;">Learn more <span style="font-size:1rem;">&#8594;</span></a>
+           <h1 class="mb-5 fw-bold" style="font-size:2.5rem; letter-spacing:-1px;">
+                            Empowering Sustainable <br> Innovation
+                            </h1>
+     
+
+
+
+ 
+                <!-- Top carousel: auto-scrolls leftward -->
+                <div class="marquee-wrapper" data-direction="-1" id="carouselTop" aria-label="Top moving carousel">
+                    <div class="marquee-track">
+                        <!-- Cards - repeat as many as needed; JS will duplicate them for seamless loop -->
+                        <div class="product-card">
+                            <div>
+                                <div class="meta mb-3">Management Consulting</div>
+                                <h5>Operations & Performance</h5>
+                                <p>Keeping track of operations, performance, and resources is essential for organizations to thrive in a digital world.</p>
+                            </div>
                         </div>
-                    </div>
-                    <hr>
-                  <div class="d-flex align-items-start mb-3">
-                        <span class="" style="font-size:2rem; color:#56bc6d;margin-right: 30px;">
-                            <!-- Data Analytics SVG Icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="#56bc6d" viewBox="0 0 24 24">
-                                <path d="M3 17a1 1 0 0 1 1-1h1v-4a1 1 0 1 1 2 0v4h1a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1zm7-8a1 1 0 0 1 1-1h1V5a1 1 0 1 1 2 0v3h1a1 1 0 1 1 0 2h-4a1 1 0 0 1-1-1zm7 4a1 1 0 0 1 1-1h1v-7a1 1 0 1 1 2 0v7h1a1 1 0 1 1 0 2h-4a1 1 0 0 1-1-1zm-7 6a1 1 0 0 1 1-1h1v-7a1 1 0 1 1 2 0v7h1a1 1 0 1 1 0 2h-4a1 1 0 0 1-1-1z"/>
-                            </svg>
-                        </span></svg>
-                        <div class="mb-1" style="">
-                            <h5 class=" mb-1" style="color:#56bc6d; font-weight: 600; font-size: 18px;">IT Consulting</h5>
-                            <p class="mb-4 text-secondary small">Keeping track of operations, performance, and resources is essential for organizations to thrive in a digital world.</p>
-                            <a href="#" class="fw-bold text-decoration-none" style="color:#000000;">Learn more <span style="font-size:1rem;">&#8594;</span></a>
+
+                        <div class="product-card">
+                            <div>
+                                <div class="meta mb-3">Data Analytics</div>
+                                <h5>Insight & Intelligence</h5>
+                                <p>Turn raw data into actionable insights for better decision-making across your organization.</p>
+                            </div>
                         </div>
-                    </div>
-                    <hr>
-               <div class="d-flex align-items-start mb-3">
-                        <span class="" style="font-size:2rem; color:#56bc6d;margin-right: 30px;">
-                            <!-- Relevant SVG for IT audit, compliance and quality assurance -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="#56bc6d" viewBox="0 0 24 24">
-                                <path d="M12 2a1 1 0 0 1 1 1v1.07A8.001 8.001 0 0 1 20.93 11H22a1 1 0 1 1 0 2h-1.07A8.001 8.001 0 0 1 13 20.93V22a1 1 0 1 1-2 0v-1.07A8.001 8.001 0 0 1 3.07 13H2a1 1 0 1 1 0-2h1.07A8.001 8.001 0 0 1 11 3.07V2a1 1 0 0 1 1-1zm0 4a6 6 0 1 0 0 12A6 6 0 0 0 12 6zm-1 3a1 1 0 0 1 2 0v2h2a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1V9z"/>
-                            </svg>
-                        </span></svg>
-                        <div class="mb-1" style="">
-                            <h5 class=" mb-1" style="color:#56bc6d; font-weight: 600; font-size: 18px;">IT audit, compliance and quality assurance</h5>
-                            <p class="mb-4 text-secondary small">Keeping track of operations, performance, and resources is essential for organizations to thrive in a digital world.</p>
-                            <a href="#" class="fw-bold text-decoration-none" style="color:#000000;">Learn more <span style="font-size:1rem;">&#8594;</span></a>
+
+                        <div class="product-card">
+                            <div>
+                                <div class="meta mb-3">IT Consulting</div>
+                                <h5>Architecture & Strategy</h5>
+                                <p>Design resilient, secure, and scalable systems that align with your business goals.</p>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div>
+                                <div class="meta mb-3">Quality & Compliance</div>
+                                <h5>Audit & Assurance</h5>
+                                <p>Ensure regulatory compliance and operational quality through rigorous assessments.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="text-start mt-3  ">
-               <a href="" class="btn btn-primary  py-3 px-5 animated slideInLeft">View All Products</a>
 
+                <!-- Spacer -->
+                <div style="height:18px;"></div>
+
+                <!-- Bottom carousel: auto-scrolls rightward -->
+                <div class="marquee-wrapper" data-direction="1" id="carouselBottom" aria-label="Bottom moving carousel">
+                    <div class="marquee-track">
+                        <div class="product-card">
+                            <div>
+                                <div class="meta mb-3">E-Government</div>
+                                <h5>Citizen Services</h5>
+                                <p>Secure digital platforms to simplify public services and improve citizen engagement.</p>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div>
+                                <div class="meta mb-3">Digital Health</div>
+                                <h5>E-Health Systems</h5>
+                                <p>Innovative solutions to streamline patient records, workflows, and care delivery.</p>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div>
+                                <div class="meta mb-3">E-Agriculture</div>
+                                <h5>Farm Tech</h5>
+                                <p>Technology to boost productivity, sustainability, and profitability across the value chain.</p>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div>
+                                <div class="meta mb-3">Transformation</div>
+                                <h5>Digital Programs</h5>
+                                <p>End-to-end transformation programs to modernize processes and accelerate growth.</p>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="text-start mt-3">
+                    <a href="#" class="btn btn-primary py-3 px-5">View All Products</a>
                 </div>
             </div>
-        </div>
+
+        <script>
+        /*
+            Auto-scroll marquee logic with duplication for seamless loop.
+            Allows manual scroll in any direction, drag-to-scroll, and wheel-to-scroll.
+        */
+        (function () {
+            'use strict';
+            // enable smooth scrolling for user-initiated actions
+            try { document.documentElement.style.scrollBehavior = 'smooth'; } catch (e) {}
+
+            // global config for smoother auto-scroll (can be read by marquee logic)
+            window.__MARQUEE_AUTO_SCROLL = {
+                speed: 0.012,   // reduced px per ms (smaller => slower)
+                easing: 0.1    // smoothing factor for lerp (0..1)
+            };
+            function setupMarquee(wrapper) {
+                const track = wrapper.querySelector('.marquee-track');
+
+                // Duplicate track content to ensure seamless scroll
+                const items = Array.from(track.children);
+                items.forEach(node => track.appendChild(node.cloneNode(true)));
+
+                // Basic state
+                let pointerDown = false;
+                let startX = 0;
+                let startScroll = 0;
+                let lastTime = performance.now();
+                let paused = false;
+
+                const direction = parseInt(wrapper.getAttribute('data-direction')) || -1; // -1 left, 1 right
+                const speed = 0.05; // px per ms, tweak to change auto speed
+
+                // Drag to scroll handlers
+                wrapper.addEventListener('pointerdown', (e) => {
+                    pointerDown = true;
+                    paused = true;
+                    wrapper.style.cursor = 'grabbing';
+                    startX = e.clientX;
+                    startScroll = wrapper.scrollLeft;
+                    wrapper.setPointerCapture(e.pointerId);
+                });
+
+                wrapper.addEventListener('pointermove', (e) => {
+                    if (!pointerDown) return;
+                    const dx = e.clientX - startX;
+                    wrapper.scrollLeft = startScroll - dx;
+                });
+
+                wrapper.addEventListener('pointerup', (e) => {
+                    pointerDown = false;
+                    paused = false;
+                    wrapper.style.cursor = 'grab';
+                    try { wrapper.releasePointerCapture(e.pointerId); } catch(e){}
+                });
+                wrapper.addEventListener('pointercancel', () => { pointerDown = false; paused = false; wrapper.style.cursor='grab'; });
+
+                // Pause on mouseenter (optional)
+                wrapper.addEventListener('mouseenter', () => paused = true);
+                wrapper.addEventListener('mouseleave', () => paused = false);
+
+                // Wheel -> horizontal scroll
+                wrapper.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    wrapper.scrollLeft += e.deltaY;
+                }, {passive:false});
+
+                // Auto-scroll loop using requestAnimationFrame
+                function step(now) {
+                    const dt = Math.max(0, now - lastTime);
+                    lastTime = now;
+
+                    if (!paused && !pointerDown) {
+                        wrapper.scrollLeft += direction * speed * dt;
+                    }
+
+                    // Seamless reset when near the end/start
+                    const maxScroll = track.scrollWidth / 2; // original content width
+                    if (direction === -1 && wrapper.scrollLeft >= maxScroll) {
+                        wrapper.scrollLeft -= maxScroll;
+                    } else if (direction === 1 && wrapper.scrollLeft <= 0) {
+                        wrapper.scrollLeft += maxScroll;
+                    }
+
+                    requestAnimationFrame(step);
+                }
+
+                requestAnimationFrame(step);
+            }
+
+            // initialize both carousels
+            document.querySelectorAll('.marquee-wrapper').forEach(setupMarquee);
+        })();
+        </script>
     </div>
 </div>
 <!-- Products Section End -->
