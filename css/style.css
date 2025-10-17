@@ -738,6 +738,10 @@ body {
                         min-height: 110px;
                         padding: 1rem 0.7rem;
                     }
+                    .stat-card{
+                     margin-right:1px;
+
+                    }
                 }
            
 
