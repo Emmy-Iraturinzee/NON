@@ -746,10 +746,11 @@
                             Empowering Sustainable <br> Innovation
                             </h1>
      
+                <!-- Scroll Indicators -->
+                <div class="scroll-indicator" style="text-align: center; margin-bottom: 10px;">
+                    <span style="font-size: 14px; color: #32C36C;">→ Scroll to see more</span>
+                </div>
 
-
-
- 
                 <!-- Top carousel: auto-scrolls leftward -->
                 <div class="marquee-wrapper" data-direction="-1" id="carouselTop" aria-label="Top moving carousel">
                     <div class="marquee-track">
@@ -826,6 +827,31 @@
                             </div>
                            
                         </div>
+                             <div class="product-card">
+                            <div>
+                                <div class="meta mb-3">Transformation</div>
+                                <h5>Digital Programs</h5>
+                                <p>End-to-end transformation programs to modernize processes and accelerate growth.</p>
+                            </div>
+                           
+                        </div>
+                             <div class="product-card">
+                            <div>
+                                <div class="meta mb-3">Transformation</div>
+                                <h5>Digital Programs</h5>
+                                <p>End-to-end transformation programs to modernize processes and accelerate growth.</p>
+                            </div>
+                           
+                        </div>
+                             <div class="product-card">
+                            <div>
+                                <div class="meta mb-3">Transformation</div>
+                                <h5>Digital Programs</h5>
+                                <p>End-to-end transformation programs to modernize processes and accelerate growth.</p>
+                            </div>
+                           
+                        </div>
+
                     </div>
                 </div>
 
@@ -845,83 +871,115 @@
             // enable smooth scrolling for user-initiated actions
             try { document.documentElement.style.scrollBehavior = 'smooth'; } catch (e) {}
 
-            // global config for smoother auto-scroll (can be read by marquee logic)
+            // global config for smoother auto-scroll
             window.__MARQUEE_AUTO_SCROLL = {
-                speed: 0.012,   // reduced px per ms (smaller => slower)
-                easing: 0.1    // smoothing factor for lerp (0..1)
+              speed: 0.03 // px per ms (increase for faster scroll)
             };
+
             function setupMarquee(wrapper) {
-                const track = wrapper.querySelector('.marquee-track');
+              const track = wrapper.querySelector('.marquee-track');
+              if (!track) return;
 
-                // Duplicate track content to ensure seamless scroll
-                const items = Array.from(track.children);
-                items.forEach(node => track.appendChild(node.cloneNode(true)));
+              // Keep original markup to clone reliably
+              const originalHTML = track.innerHTML.trim();
+              if (!originalHTML) return;
 
-                // Basic state
-                let pointerDown = false;
-                let startX = 0;
-                let startScroll = 0;
-                let lastTime = performance.now();
-                let paused = false;
+              // Ensure track content is duplicated enough to be at least twice the visible area
+              function ensureWideEnough() {
+                // if images still loading, wait a bit and retry
+                const neededWidth = wrapper.clientWidth * 2;
+                // Append clones until track is wide enough
+                // (start by having at least one copy, then duplicate repeatedly)
+                let safety = 0;
+                while (track.scrollWidth < neededWidth && safety++ < 20) {
+                  track.innerHTML += originalHTML;
+                }
+              }
 
-                const direction = parseInt(wrapper.getAttribute('data-direction')) || -1; // -1 left, 1 right
-                const speed = 0.05; // px per ms, tweak to change auto speed
+              // Initial ensure (some images may change width after load)
+              ensureWideEnough();
 
-                // Drag to scroll handlers
-                wrapper.addEventListener('pointerdown', (e) => {
-                    pointerDown = true;
-                    paused = true;
-                    wrapper.style.cursor = 'grabbing';
-                    startX = e.clientX;
-                    startScroll = wrapper.scrollLeft;
-                    wrapper.setPointerCapture(e.pointerId);
+              // If images are present, re-run ensure when they load
+              const imgs = track.querySelectorAll('img');
+              let imgsToLoad = imgs.length;
+              if (imgsToLoad > 0) {
+                imgs.forEach(img => {
+                  if (img.complete) {
+                    imgsToLoad--;
+                  } else {
+                    img.addEventListener('load', () => {
+                      imgsToLoad--;
+                      if (imgsToLoad === 0) ensureWideEnough();
+                    }, { once: true });
+                    img.addEventListener('error', () => {
+                      imgsToLoad--;
+                      if (imgsToLoad === 0) ensureWideEnough();
+                    }, { once: true });
+                  }
                 });
+                // safeguard: ensure again after a short delay in case loads are slow
+                setTimeout(() => ensureWideEnough(), 500);
+              }
 
-                wrapper.addEventListener('pointermove', (e) => {
-                    if (!pointerDown) return;
-                    const dx = e.clientX - startX;
-                    wrapper.scrollLeft = startScroll - dx;
-                });
+              // Recompute on resize
+              let resizeTimer;
+              const onResize = () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                  // reset to original + duplicates, then ensure width
+                  track.innerHTML = originalHTML;
+                  ensureWideEnough();
+                  // reposition scroll to maintain seamless effect
+                  const half = track.scrollWidth / 2;
+                  if (direction === 1) wrapper.scrollLeft = Math.floor(half / 2);
+                }, 120);
+              };
+              window.addEventListener('resize', onResize);
 
-                wrapper.addEventListener('pointerup', (e) => {
-                    pointerDown = false;
-                    paused = false;
-                    wrapper.style.cursor = 'grab';
-                    try { wrapper.releasePointerCapture(e.pointerId); } catch(e){}
-                });
-                wrapper.addEventListener('pointercancel', () => { pointerDown = false; paused = false; wrapper.style.cursor='grab'; });
+              // direction: -1 leftward, 1 rightward
+              const direction = parseInt(wrapper.getAttribute('data-direction')) || -1;
+              const speed = window.__MARQUEE_AUTO_SCROLL.speed || 0.03;
 
-                // Pause on mouseenter (optional)
-                wrapper.addEventListener('mouseenter', () => paused = true);
-                wrapper.addEventListener('mouseleave', () => paused = false);
+              // For smooth seamless looping we treat half the track as one loop (original content replicated)
+              const getHalfWidth = () => Math.max(1, track.scrollWidth / 2);
 
-                // Wheel -> horizontal scroll
-                wrapper.addEventListener('wheel', (e) => {
-                    e.preventDefault();
-                    wrapper.scrollLeft += e.deltaY;
-                }, {passive:false});
+              // For rightward loops, start somewhere in the middle so we can scroll right seamlessly
+              if (direction === 1 && wrapper.scrollLeft === 0) {
+                wrapper.scrollLeft = Math.floor(getHalfWidth() / 2);
+              }
 
-                // Auto-scroll loop using requestAnimationFrame
-                function step(now) {
-                    const dt = Math.max(0, now - lastTime);
-                    lastTime = now;
+              let lastTime = performance.now();
 
-                    if (!paused && !pointerDown) {
-                        wrapper.scrollLeft += direction * speed * dt;
-                    }
+              // Main auto-scroll loop (infinite)
+              function step(now) {
+                const dt = Math.max(0, now - lastTime);
+                lastTime = now;
 
-                    // Seamless reset when near the end/start
-                    const maxScroll = track.scrollWidth / 2; // original content width
-                    if (direction === -1 && wrapper.scrollLeft >= maxScroll) {
-                        wrapper.scrollLeft -= maxScroll;
-                    } else if (direction === 1 && wrapper.scrollLeft <= 0) {
-                        wrapper.scrollLeft += maxScroll;
-                    }
+                // advance scroll
+                wrapper.scrollLeft += direction * speed * dt;
 
-                    requestAnimationFrame(step);
+                const halfWidth = getHalfWidth();
+
+                // Seamless reset when crossing boundaries
+                if (direction === -1 && wrapper.scrollLeft >= halfWidth) {
+                  wrapper.scrollLeft -= halfWidth;
+                } else if (direction === 1 && wrapper.scrollLeft <= 0) {
+                  wrapper.scrollLeft += halfWidth;
                 }
 
                 requestAnimationFrame(step);
+              }
+
+              requestAnimationFrame(step);
+
+              // Clean-up hook in case the element is removed later
+              const mo = new MutationObserver((mutations) => {
+                if (!document.contains(wrapper)) {
+                  window.removeEventListener('resize', onResize);
+                  mo.disconnect();
+                }
+              });
+              mo.observe(document.body, { childList: true, subtree: true });
             }
 
             // initialize both carousels
@@ -1052,8 +1110,8 @@
     <!-- Testimonial End -->
 
     <!-- Call to Action Section Start -->
-    <section class="cta-section" style="position:relative; background: #050e4200 url('img/agri.png') center center/cover no-repeat; min-height: 420px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
-        <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(10, 20, 60, 0.055);z-index:1;"></div>
+    <section class="cta-section" style="position:relative; background: #050e4200 url('img/future-hero-bg.jpg') center center/cover no-repeat; min-height: 420px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+        <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(10, 20, 60, 0.756);z-index:1;"></div>
         <div class="container position-relative" style="z-index:2;">
             <div class="row justify-content-center text-center">
                 <div class="col-lg-10">
