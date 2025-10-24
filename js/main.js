@@ -318,5 +318,86 @@
                                 }
                                 document.querySelectorAll('.count-up').forEach(animateCountUp);
                             });
+
+           // Search Overlay
+
+          
+                              (function(){
+                                const openBtn = document.getElementById('navSearchBtn');
+                                const overlay = document.getElementById('navSearchOverlay');
+                                const box = document.getElementById('navSearchBox');
+                                const input = document.getElementById('navSearchInput');
+                                const closeBtn = document.getElementById('navSearchClose'); // may be null
+
+                                function openSearch(e){
+                                  if(e) { e.preventDefault(); e.stopPropagation(); }
+                                  if(!overlay) return;
+                                  overlay.style.display = 'flex';
+                                  // prevent background scroll
+                                  document.documentElement.style.overflow = 'hidden';
+                                  document.body.style.overflow = 'hidden';
+                                  setTimeout(() => input && input.focus(), 50);
+                                }
+                                function closeSearch(){
+                                  if(!overlay) return;
+                                  overlay.style.display = 'none';
+                                  document.documentElement.style.overflow = '';
+                                  document.body.style.overflow = '';
+                                  input && input.blur();
+                                }
+
+                                openBtn && openBtn.addEventListener('click', openSearch);
+                                if (closeBtn) closeBtn.addEventListener('click', function(e){ e.stopPropagation(); closeSearch(); });
+
+                                // close when clicking on overlay background
+                                overlay && overlay.addEventListener('click', function(e){
+                                  // clicking anywhere (including inside the box) should close per request
+                                  closeSearch();
+                                });
+
+                                // also close on any document click while overlay is visible (covers clicks outside overlay)
+                                document.addEventListener('click', function(e){
+                                  if (!overlay) return;
+                                  if (overlay.style.display === 'flex') {
+                                    // ignore the click that opened the search button (stopped propagation) and any programmatic clicks
+                                    // if click target is the open button, ignore
+                                    if (openBtn && openBtn.contains(e.target)) return;
+                                    closeSearch();
+                                  }
+                                });
+
+                                // Esc to close
+                                document.addEventListener('keydown', function(e){
+                                  if (e.key === 'Escape' && overlay && overlay.style.display === 'flex') closeSearch();
+                                  if (e.key === 'Enter' && document.activeElement === input) {
+                                    e.preventDefault();
+                                    console.log('Search query:', input.value);
+                                    // optionally closeSearch();
+                                  }
+                                });
+
+                                // Basic focus trap while overlay visible
+                                overlay && overlay.addEventListener('keydown', function(e){
+                                  if (e.key === 'Tab') {
+                                    const focusable = Array.from(box.querySelectorAll('input, button, [tabindex]:not([tabindex="-1"])'))
+                                      .filter(el => !el.disabled);
+                                    if (focusable.length === 0) return;
+                                    const first = focusable[0], last = focusable[focusable.length - 1];
+                                    if (e.shiftKey && document.activeElement === first) {
+                                      e.preventDefault(); last.focus();
+                                    } else if (!e.shiftKey && document.activeElement === last) {
+                                      e.preventDefault(); first.focus();
+                                    }
+                                  }
+                                });
+                              })();
                         
-               
+
+                            //   Scroll Progress Bar
+
+                                 window.addEventListener('scroll', function() {
+            var scrollTop = window.scrollY || document.documentElement.scrollTop;
+            var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            var scrolled = (scrollTop / docHeight) * 100;
+            document.getElementById('scrollProgressBar').style.width = scrolled + '%';
+        });
