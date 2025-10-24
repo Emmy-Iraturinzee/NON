@@ -329,6 +329,99 @@
                                 const input = document.getElementById('navSearchInput');
                                 const closeBtn = document.getElementById('navSearchClose'); // may be null
 
+                                // ensure a results container inside the search box
+                                let resultsContainer = document.getElementById('navSearchResults');
+                                if (!resultsContainer && box) {
+                                  resultsContainer = document.createElement('div');
+                                  resultsContainer.id = 'navSearchResults';
+                                  resultsContainer.style.maxHeight = '50vh';
+                                  resultsContainer.style.overflow = 'auto';
+                                  resultsContainer.style.marginTop = '12px';
+                                  box.appendChild(resultsContainer);
+                                }
+
+                                function renderResults(items, query) {
+                                  if (!resultsContainer) return;
+                                  resultsContainer.innerHTML = '';
+                                  const q = query.trim();
+                                  if (q === '') {
+                                    const p = document.createElement('div');
+                                    p.textContent = 'Please enter a search term';
+                                    resultsContainer.appendChild(p);
+                                    return;
+                                  }
+                                  if (items.length === 0) {
+                                    const p = document.createElement('div');
+                                    p.textContent = 'No result found';
+                                    resultsContainer.appendChild(p);
+                                    return;
+                                  }
+                                  const ul = document.createElement('ul');
+                                  ul.style.listStyle = 'none';
+                                  ul.style.padding = '0';
+                                  ul.style.margin = '0';
+                                  items.forEach(it => {
+                                    const li = document.createElement('li');
+                                    li.style.padding = '8px 6px';
+                                    li.style.borderBottom = '1px solid rgba(0,0,0,0.06)';
+                                    li.style.cursor = 'pointer';
+                                    li.tabIndex = 0;
+                                    li.textContent = it.title;
+                                    li.addEventListener('click', (e) => {
+                                      e.preventDefault();
+                                      e.stopPropagation();
+                                      if (it.el) {
+                                        // if matched element is on page, scroll to it
+                                        it.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                      } else if (it.href) {
+                                        window.location.href = it.href;
+                                      }
+                                      closeSearch();
+                                    });
+                                    li.addEventListener('keydown', (e) => {
+                                      if (e.key === 'Enter') li.click();
+                                    });
+                                    ul.appendChild(li);
+                                  });
+                                  resultsContainer.appendChild(ul);
+                                }
+
+                                // build searchable index from page elements
+                                function buildIndex() {
+                                  const nodes = [];
+                                  // Preference order: elements with data-search, data-title, [data-searchable], .search-item, nav links and headings
+                                  const selector = '[data-search], [data-title], [data-searchable], .search-item, nav a, a, h1, h2, h3, .card, .product';
+                                  document.querySelectorAll(selector).forEach(el => {
+                                    // skip elements inside the overlay itself
+                                    if (overlay && overlay.contains(el)) return;
+                                    const title = (el.getAttribute('data-search') || el.getAttribute('data-title') || el.getAttribute('data-searchable') || el.textContent || '').trim();
+                                    if (!title) return;
+                                    const href = (el.tagName.toLowerCase() === 'a' && el.href) ? el.href : null;
+                                    nodes.push({ title: title.replace(/\s+/g,' ').trim(), el: el, href });
+                                  });
+                                  // dedupe by title
+                                  const seen = new Set();
+                                  return nodes.filter(n => {
+                                    const key = n.title.toLowerCase();
+                                    if (seen.has(key)) return false;
+                                    seen.add(key);
+                                    return true;
+                                  });
+                                }
+
+                                const index = buildIndex();
+
+                                function performSearch(query) {
+                                  const q = (query || '').trim().toLowerCase();
+                                  if (q === '') {
+                                    renderResults([], query);
+                                    return;
+                                  }
+                                  // simple substring match
+                                  const matches = index.filter(item => item.title.toLowerCase().includes(q));
+                                  renderResults(matches, query);
+                                }
+
                                 function openSearch(e){
                                   if(e) { e.preventDefault(); e.stopPropagation(); }
                                   if(!overlay) return;
@@ -336,7 +429,11 @@
                                   // prevent background scroll
                                   document.documentElement.style.overflow = 'hidden';
                                   document.body.style.overflow = 'hidden';
-                                  setTimeout(() => input && input.focus(), 50);
+                                  setTimeout(() => {
+                                    input && input.focus();
+                                    // clear previous results
+                                    if (resultsContainer) resultsContainer.innerHTML = '';
+                                  }, 50);
                                 }
                                 function closeSearch(){
                                   if(!overlay) return;
@@ -344,37 +441,248 @@
                                   document.documentElement.style.overflow = '';
                                   document.body.style.overflow = '';
                                   input && input.blur();
+                                  if (resultsContainer) resultsContainer.innerHTML = '';
+                                }
+
+                                // if there is no provided close button, create a close icon button inside the box
+                                let generatedClose = null;
+                                if (!closeBtn && box) {
+                                  generatedClose = document.createElement('button');
+                                  generatedClose.type = 'button';
+                                  generatedClose.id = 'navSearchCloseGenerated';
+                                  generatedClose.setAttribute('aria-label', 'Close search');
+                                  generatedClose.innerHTML = '✕';
+                                  // basic styles (adjust in CSS if needed)
+                                  generatedClose.style.position = 'absolute';
+                                  generatedClose.style.top = '8px';
+                                  generatedClose.style.right = '8px';
+                                  generatedClose.style.background = 'transparent';
+                                  generatedClose.style.border = 'none';
+                                  generatedClose.style.fontSize = '20px';
+                                  generatedClose.style.cursor = 'pointer';
+                                  generatedClose.style.padding = '4px';
+                                  generatedClose.style.lineHeight = '1';
+                                  generatedClose.style.color = 'inherit';
+                                  box.style.position = box.style.position || 'relative';
+                                  box.appendChild(generatedClose);
+                                  generatedClose.addEventListener('click', function(e){
+                                    e.stopPropagation();
+                                    closeSearch();
+                                  });
                                 }
 
                                 openBtn && openBtn.addEventListener('click', openSearch);
                                 if (closeBtn) closeBtn.addEventListener('click', function(e){ e.stopPropagation(); closeSearch(); });
 
-                                // close when clicking on overlay background
-                                overlay && overlay.addEventListener('click', function(e){
-                                  // clicking anywhere (including inside the box) should close per request
-                                  closeSearch();
-                                });
+                                // NOTE: removed auto-close on overlay/background/document clicks per request
+                                // Overlay background and document clicks will no longer close the search. Use the close button or Escape key.
 
-                                // also close on any document click while overlay is visible (covers clicks outside overlay)
-                                document.addEventListener('click', function(e){
-                                  if (!overlay) return;
-                                  if (overlay.style.display === 'flex') {
-                                    // ignore the click that opened the search button (stopped propagation) and any programmatic clicks
-                                    // if click target is the open button, ignore
-                                    if (openBtn && openBtn.contains(e.target)) return;
-                                    closeSearch();
+                                // helpers to match site palette (fall back to sensible defaults)
+                                const __rootStyles = getComputedStyle(document.documentElement);
+                                const __primary = (__rootStyles.getPropertyValue('--bs-primary') || __rootStyles.getPropertyValue('--primary') || '#8fffb1').trim();
+                                const __muted = (__rootStyles.getPropertyValue('--bs-muted') || '#6c757d').trim();
+                                const __bg = (__rootStyles.getPropertyValue('--bs-body-bg') || '#ffffff').trim();
+                                const __text = (__rootStyles.getPropertyValue('--bs-body-color') || '#212529').trim();
+
+                                // create a document fragment with highlighted parts (no raw HTML strings)
+                                function createHighlightedNode(text, q) {
+                                  const frag = document.createDocumentFragment();
+                                  const str = String(text || '').replace(/\s+/g, ' ').trim();
+                                  if (!q) {
+                                    frag.appendChild(document.createTextNode(str));
+                                    return frag;
                                   }
-                                });
+                                  const lower = str.toLowerCase();
+                                  const qi = q.toLowerCase();
+                                  const idx = lower.indexOf(qi);
+                                  if (idx === -1) {
+                                    frag.appendChild(document.createTextNode(str));
+                                    return frag;
+                                  }
+                                  const before = str.slice(0, idx);
+                                  const match = str.slice(idx, idx + q.length);
+                                  const after = str.slice(idx + q.length);
+                                  if (before) frag.appendChild(document.createTextNode(before));
+                                  const span = document.createElement('span');
+                                  span.textContent = match;
+                                  span.style.background = (__primary ? __primary + '22' : '#8fffb122');
+                                  span.style.color = __text || '#212529';
+                                  span.style.padding = '2px 4px';
+                                  span.style.borderRadius = '4px';
+                                  frag.appendChild(span);
+                                  if (after) frag.appendChild(document.createTextNode(after));
+                                  return frag;
+                                }
 
-                                // Esc to close
+                                // pretty result renderer (uses DOM nodes, no innerHTML with tags)
+                                function renderResults(items, query) {
+                                  if (!resultsContainer) return;
+                                  resultsContainer.innerHTML = '';
+
+                                  // container styles to match palette
+                                  resultsContainer.style.background = __bg || '#fff';
+                                  resultsContainer.style.border = '1px solid rgba(0,0,0,0.06)';
+                                  resultsContainer.style.padding = '8px';
+                                  resultsContainer.style.borderRadius = '8px';
+                                  resultsContainer.style.boxShadow = '0 6px 18px rgba(0,0,0,0.06)';
+                                  resultsContainer.style.maxHeight = '50vh';
+                                  resultsContainer.style.overflow = 'auto';
+
+                                  const q = (query || '').trim();
+                                  if (q === '') {
+                                    const p = document.createElement('div');
+                                    p.textContent = 'Please enter a search term';
+                                    p.style.color = __muted;
+                                    p.style.padding = '12px';
+                                    resultsContainer.appendChild(p);
+                                    return;
+                                  }
+                                  if (items.length === 0) {
+                                    const p = document.createElement('div');
+                                    p.textContent = 'No result found';
+                                    p.style.color = __muted;
+                                    p.style.padding = '12px';
+                                    resultsContainer.appendChild(p);
+                                    return;
+                                  }
+
+                                  // results list
+                                  const list = document.createElement('div');
+                                  list.style.display = 'grid';
+                                  list.style.gridTemplateColumns = '1fr';
+                                  list.style.gap = '8px';
+
+                                  items.forEach(it => {
+                                    const card = document.createElement('div');
+                                    card.className = 'nav-search-result';
+                                    card.style.padding = '10px';
+                                    card.style.borderRadius = '8px';
+                                    card.style.cursor = 'pointer';
+                                    card.style.display = 'flex';
+                                    card.style.flexDirection = 'column';
+                                    card.style.gap = '6px';
+                                    card.style.transition = 'transform .12s ease, box-shadow .12s ease, background .12s ease';
+                                    card.style.background = 'transparent';
+                                    card.tabIndex = 0;
+
+                                    // title
+                                    const title = document.createElement('div');
+                                    title.style.fontWeight = '600';
+                                    title.style.color = __text;
+                                    title.style.fontSize = '14px';
+                                    const titleText = it.title || (it.el && it.el.textContent) || '';
+                                    title.appendChild(createHighlightedNode(titleText, q));
+                                    card.appendChild(title);
+
+                                    // snippet: show small excerpt around match if available
+                                    let snippetText = '';
+                                    if (it.el && it.el.textContent) {
+                                      const txt = it.el.textContent.replace(/\s+/g,' ').trim();
+                                      const li = txt.toLowerCase().indexOf(q.toLowerCase());
+                                      if (li !== -1) {
+                                        const start = Math.max(0, li - 36);
+                                        const end = Math.min(txt.length, li + q.length + 36);
+                                        snippetText = (start > 0 ? '…' : '') + txt.slice(start, end).trim() + (end < txt.length ? '…' : '');
+                                      }
+                                    } else if (it.href) {
+                                      snippetText = it.href;
+                                    }
+
+                                    if (snippetText) {
+                                      const snippet = document.createElement('div');
+                                      snippet.style.fontSize = '12px';
+                                      snippet.style.color = __muted;
+                                      snippet.style.lineHeight = '1.3';
+                                      snippet.appendChild(createHighlightedNode(snippetText, q));
+                                      card.appendChild(snippet);
+                                    }
+
+                                    // meta row
+                                    const meta = document.createElement('div');
+                                    meta.style.display = 'flex';
+                                    meta.style.justifyContent = 'space-between';
+                                    meta.style.alignItems = 'center';
+                                    meta.style.marginTop = '4px';
+
+                                    const source = document.createElement('div');
+                                    source.style.fontSize = '11px';
+                                    source.style.color = __muted;
+                                    source.textContent = it.href ? (new URL(it.href, location.href)).pathname : (it.el ? (it.el.tagName.toLowerCase()) : '');
+                                    meta.appendChild(source);
+
+                                    if (it.href) {
+                                      const link = document.createElement('a');
+                                      link.href = it.href;
+                                      link.textContent = 'Open';
+                                      link.style.fontSize = '12px';
+                                      link.style.color = __primary;
+                                      link.style.textDecoration = 'none';
+                                      link.style.fontWeight = '600';
+                                      link.style.marginLeft = '8px';
+                                      link.addEventListener('click', (e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        closeSearch();
+                                        window.location.href = it.href;
+                                      });
+                                      meta.appendChild(link);
+                                    } else {
+                                      const onpage = document.createElement('div');
+                                      onpage.textContent = 'On page';
+                                      onpage.style.fontSize = '11px';
+                                      onpage.style.color = __muted;
+                                      meta.appendChild(onpage);
+                                    }
+
+                                    card.appendChild(meta);
+
+                                    // interactions
+                                    card.addEventListener('click', (e) => {
+                                      e.preventDefault(); e.stopPropagation();
+                                      if (it.el) {
+                                        it.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                      } else if (it.href) {
+                                        window.location.href = it.href;
+                                      }
+                                      closeSearch();
+                                    });
+                                    card.addEventListener('keydown', (e) => {
+                                      if (e.key === 'Enter') card.click();
+                                    });
+                                    card.addEventListener('mouseenter', () => {
+                                      card.style.transform = 'translateY(-3px)';
+                                      card.style.boxShadow = '0 10px 30px rgba(0,0,0,0.08)';
+                                      card.style.background = 'rgba(0,0,0,0.02)';
+                                    });
+                                    card.addEventListener('mouseleave', () => {
+                                      card.style.transform = '';
+                                      card.style.boxShadow = '';
+                                      card.style.background = 'transparent';
+                                    });
+
+                                    list.appendChild(card);
+                                  });
+
+                                  resultsContainer.appendChild(list);
+                                }
+
+                                // Esc to close and Enter to search
                                 document.addEventListener('keydown', function(e){
                                   if (e.key === 'Escape' && overlay && overlay.style.display === 'flex') closeSearch();
                                   if (e.key === 'Enter' && document.activeElement === input) {
                                     e.preventDefault();
-                                    console.log('Search query:', input.value);
-                                    // optionally closeSearch();
+                                    performSearch(input.value);
                                   }
                                 });
+
+                                // live search as user types (optional)
+                                if (input) {
+                                  let debounce = null;
+                                  input.addEventListener('input', function(){
+                                    clearTimeout(debounce);
+                                    debounce = setTimeout(() => performSearch(input.value), 250);
+                                  });
+                                }
 
                                 // Basic focus trap while overlay visible
                                 overlay && overlay.addEventListener('keydown', function(e){
