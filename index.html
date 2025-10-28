@@ -89,9 +89,9 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="" class="nav-item nav-link active">Home</a>
-                <a href="" class="nav-item nav-link">About</a>
-                <a href="" class="nav-item nav-link">Our Service</a>
-                <a href="" class="nav-item nav-link">Our Products</a>
+                <a href="" class="nav-item nav-link"onclick="event.preventDefault(); const el=document.getElementById('about'); if(el) el.scrollIntoView({behavior:'smooth', block:'end'}); const nav=document.getElementById('navbarCollapse'); if(nav && nav.classList.contains('show')) nav.classList.remove('show'); document.querySelectorAll('#navbarCollapse .nav-link').forEach(a=>{ a.classList.remove('active'); a.style.color=''; }); this.classList.add('active'); this.style.color='#74a404';">About</a>
+                <a href="" class="nav-item nav-link"onclick="event.preventDefault(); const el=document.getElementById('services'); if(el) el.scrollIntoView({behavior:'smooth', block:'end'}); const nav=document.getElementById('navbarCollapse'); if(nav && nav.classList.contains('show')) nav.classList.remove('show'); document.querySelectorAll('#navbarCollapse .nav-link').forEach(a=>{ a.classList.remove('active'); a.style.color=''; }); this.classList.add('active'); this.style.color='#74a404';">Our Service</a>
+                <a href="#products" class="nav-item nav-link" onclick="event.preventDefault(); const el=document.getElementById('products'); if(el) el.scrollIntoView({behavior:'smooth', block:'end'}); const nav=document.getElementById('navbarCollapse'); if(nav && nav.classList.contains('show')) nav.classList.remove('show'); document.querySelectorAll('#navbarCollapse .nav-link').forEach(a=>{ a.classList.remove('active'); a.style.color=''; }); this.classList.add('active'); this.style.color='#74a404';">Our Products</a>
                 <!-- Login Button in Navbar -->
                 <!-- <a href="#" id="loginLink" class="nav-item nav-link">Login</a> -->
                 <!-- <div class="nav-item dropdown">
@@ -111,18 +111,241 @@
                             </a>
 
                             <!-- Floating search + overlay (placed inside navbar collapse so it loads with the page) -->
-                            <div id="navSearchOverlay" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,0.6); align-items:center; justify-content:center; padding:20px; box-sizing:border-box;">
+                            <div id="navSearchOverlay" aria-hidden="true"
+                                 style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(6,10,20,0.55); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); align-items:center; justify-content:center; padding:20px; box-sizing:border-box;">
                               <div id="navSearchBox" role="dialog" aria-modal="true" aria-label="Site search"
-                                   style="background:#fff; width:clamp(320px,70%,900px); margin:0 20px; border-radius:10px; padding:18px; box-shadow:0 10px 40px rgba(0,0,0,0.4);">
-                                <div style="display:flex; gap:8px; align-items:center;">
-                                  <input id="navSearchInput" type="search" placeholder="Search the site..." autofocus
-                                         style="flex:1; border:1px solid #e6e6e6; border-radius:8px; padding:12px 14px; font-size:1rem; outline:none;">
-                                  <button id="navSearchSubmit" class="btn btn-primary" style="padding:10px 14px; font-weight:600;">
-                                    <i class="fa fa-search"></i>
+                                   style="background:#0f1724; color:#e6eef8; width:clamp(330px,72%,980px); margin:0 20px; border-radius:12px; padding:18px; box-shadow:0 12px 60px rgba(2,6,23,0.6); transform:translateY(-8px) scale(.995); opacity:0; transition:transform .22s ease, opacity .22s ease;">
+                                <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px;">
+                                  <div style="display:flex; gap:12px; align-items:center;">
+                                    <div style="width:44px; height:44px; border-radius:10px; display:grid; place-items:center; background:linear-gradient(135deg,#74a404,#1128B3); box-shadow:0 6px 20px rgba(17,40,179,0.18);">
+                                      <i class="fa fa-search" style="color:white; font-size:1.05rem;" aria-hidden="true"></i>
+                                    </div>
+                                    <div>
+                                      <div style="font-weight:700; font-size:0.95rem;">Search the site</div>
+                                      <div style="font-size:0.8rem; color:rgba(230,238,248,0.7);">Pages, services, articles & more</div>
+                                    </div>
+                                  </div>
+
+                                  <div style="display:flex; gap:8px; align-items:center;">
+                                    <div style="font-size:0.8rem; color:rgba(230,238,248,0.7); padding:6px 8px; border-radius:8px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03);">
+                                      <span style="font-weight:600;">⌘</span> + <span style="font-weight:600;">K</span>
+                                    </div>
+                                    <button id="navSearchClose" class="btn btn-link" aria-label="Close search" style="color:rgba(230,238,248,0.9); text-decoration:none; font-size:1.05rem; padding:6px 10px; border-radius:8px; background:transparent; border:none;">✕</button>
+                                  </div>
+                                </div>
+
+                                <div style="display:flex; gap:10px; align-items:center;">
+                                  <input id="navSearchInput" type="search" placeholder="Try “E-Agriculture”, “Digital Health”, or “IT Consulting”"
+                                         aria-controls="navSearchResults" aria-autocomplete="list" autocomplete="off"
+                                         style="flex:1; border:1px solid rgba(255,255,255,0.06); background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); color:#e6eef8; border-radius:10px; padding:14px 14px; font-size:1rem; outline:none; transition:box-shadow .15s ease;">
+                                  <button id="navSearchSubmit" class="btn" style="background:linear-gradient(135deg,#74a404,#1128B3); color:#fff; padding:10px 14px; font-weight:700; border-radius:10px; border:none;">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
                                   </button>
-                               
+                                </div>
+
+                                <div id="navSearchResults" role="listbox" aria-label="Search results"
+                                     style="margin-top:12px; max-height:320px; overflow:auto; border-radius:8px; padding:8px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0));">
+                                  <!-- JS will populate suggestions here -->
                                 </div>
                               </div>
+
+                              <script>
+                                (function(){
+                                  const overlay = document.getElementById('navSearchOverlay');
+                                  const box = document.getElementById('navSearchBox');
+                                  const input = document.getElementById('navSearchInput');
+                                  const submit = document.getElementById('navSearchSubmit');
+                                  const closeBtn = document.getElementById('navSearchClose');
+                                  const results = document.getElementById('navSearchResults');
+                                  const openBtn = document.getElementById('navSearchBtn');
+
+                                  const PAGES = [
+                                    {title:'Home', href:'#'},
+                                    {title:'About', href:'#about'},
+                                    {title:'Our Services', href:'#services'},
+                                    {title:'Products', href:'#products'},
+                                    {title:'E-Agriculture', href:'#products'},
+                                    {title:'Digital Health', href:'#products'},
+                                    {title:'Digital Trade', href:'#products'},
+                                    {title:'IT Consulting', href:'#services'},
+                                    {title:'Management Consulting', href:'#management'},
+                                    {title:'Blog', href:'contact.html'},
+                                    {title:'Contact', href:'contact.html'}
+                                  ];
+
+                                  function openSearch() {
+                                    overlay.style.display = 'flex';
+                                    overlay.setAttribute('aria-hidden','false');
+                                    requestAnimationFrame(()=>{ box.style.transform='translateY(0) scale(1)'; box.style.opacity='1'; });
+                                    setTimeout(()=> input.focus(), 120);
+                                    renderResults(); // show recents initially
+                                    // trap scroll on body
+                                    document.documentElement.style.overflow = 'hidden';
+                                  }
+
+                                  function closeSearch() {
+                                    box.style.transform='translateY(-8px) scale(.995)';
+                                    box.style.opacity='0';
+                                    overlay.setAttribute('aria-hidden','true');
+                                    setTimeout(()=>{ overlay.style.display='none'; results.innerHTML=''; }, 220);
+                                    document.documentElement.style.overflow = '';
+                                    openBtn && openBtn.focus();
+                                  }
+
+                                  function highlight(text, term){
+                                    if(!term) return text;
+                                    const re = new RegExp('('+term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') +')','ig');
+                                    return text.replace(re, '<mark style="background:rgba(116,164,4,0.16); color:#fff; padding:0 4px; border-radius:4px;">$1</mark>');
+                                  }
+
+                                  function getRecent() {
+                                    try {
+                                      return JSON.parse(localStorage.getItem('navRecentSearches')||'[]');
+                                    } catch(e){ return []; }
+                                  }
+                                  function saveRecent(q) {
+                                    if(!q) return;
+                                    let arr = getRecent();
+                                    arr = arr.filter(x=>x!==q);
+                                    arr.unshift(q);
+                                    arr = arr.slice(0,6);
+                                    localStorage.setItem('navRecentSearches', JSON.stringify(arr));
+                                  }
+
+                                  function renderResults(filter='') {
+                                    const f = (filter||'').trim().toLowerCase();
+                                    const recent = getRecent();
+                                    let html = '';
+
+                                    if(!f && recent.length){
+                                      html += '<div style="font-size:0.85rem; color:rgba(230,238,248,0.7); padding:6px 8px;">Recent searches</div>';
+                                      html += '<div style="display:flex; gap:8px; flex-wrap:wrap; padding:6px 4px 8px 4px;">' +
+                                        recent.map(r=>`<button class="recent-chip" data-q="${encodeURIComponent(r)}" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.03); color:#e6eef8; padding:6px 10px; border-radius:999px; cursor:pointer;">${r}</button>`).join('') +
+                                        '</div>';
+                                    }
+
+                                    // filter pages
+                                    const matches = PAGES.filter(p => p.title.toLowerCase().includes(f));
+                                    if(matches.length){
+                                      html += '<div style="font-size:0.85rem; color:rgba(230,238,248,0.7); padding:6px 8px;">Results</div>';
+                                      html += '<ul style="list-style:none; margin:0; padding:6px 0;">' +
+                                        matches.map((m,idx)=>`
+                                          <li role="option" data-idx="${idx}" style="display:flex; align-items:center; gap:10px; padding:12px; border-radius:8px; margin:6px 2px; cursor:pointer; transition:background .12s;">
+                                            <div style="width:44px;height:44px;border-radius:8px;background:rgba(255,255,255,0.03); display:grid; place-items:center; font-weight:700; color:#dbeafe;">${m.title.charAt(0)}</div>
+                                            <div>
+                                              <div style="font-weight:600;">${highlight(m.title, f)}</div>
+                                              <div style="font-size:0.82rem; color:rgba(230,238,248,0.6)">${m.href.replace(/^#/, '') || 'Home'}</div>
+                                            </div>
+                                          </li>
+                                        `).join('') +
+                                        '</ul>';
+                                    } else if(!f){
+                                      html += '<div style="padding:10px; color:rgba(230,238,248,0.65);">Try searching for pages, services or topics.</div>';
+                                    } else {
+                                      html += '<div style="padding:12px; color:rgba(230,238,248,0.6);">No results found. Try another keyword.</div>';
+                                    }
+
+                                    results.innerHTML = html;
+                                    attachResultHandlers();
+                                  }
+
+                                  function attachResultHandlers(){
+                                    // recent chips
+                                    results.querySelectorAll('.recent-chip').forEach(btn=>{
+                                      btn.onclick = ()=>{ input.value = decodeURIComponent(btn.dataset.q); input.dispatchEvent(new Event('input')); input.focus(); };
+                                    });
+                                    // result items
+                                    results.querySelectorAll('li[role="option"]').forEach(li=>{
+                                      li.onmouseenter = ()=> { li.style.background = 'rgba(255,255,255,0.02)'; li.setAttribute('aria-selected','true'); };
+                                      li.onmouseleave = ()=> { li.style.background = 'transparent'; li.setAttribute('aria-selected','false'); };
+                                      li.onclick = ()=> {
+                                        const idx = Number(li.dataset.idx);
+                                        const item = PAGES[idx];
+                                        saveRecent(input.value || item.title);
+                                        // navigate / simulate existing smooth scroll behaviour if anchor
+                                        if(item.href.startsWith('#')){
+                                          const el = document.querySelector(item.href);
+                                          if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+                                        } else {
+                                          // full navigation
+                                          window.location.href = item.href;
+                                        }
+                                        closeSearch();
+                                      };
+                                    });
+                                  }
+
+                                  // keyboard nav in results
+                                  let focused = -1;
+                                  function focusItem(n){
+                                    const items = Array.from(results.querySelectorAll('li[role="option"]'));
+                                    items.forEach((it,i)=> it.style.background = i===n ? 'rgba(255,255,255,0.03)' : 'transparent');
+                                    focused = n;
+                                  }
+
+                                  input.addEventListener('input', e => {
+                                    renderResults(e.target.value);
+                                    focused = -1;
+                                  });
+
+                                  input.addEventListener('keydown', e=>{
+                                    const items = Array.from(results.querySelectorAll('li[role="option"]'));
+                                    if(e.key === 'ArrowDown'){
+                                      e.preventDefault();
+                                      if(items.length) focusItem((focused + 1) % items.length);
+                                    } else if(e.key === 'ArrowUp'){
+                                      e.preventDefault();
+                                      if(items.length) focusItem((focused - 1 + items.length) % items.length);
+                                    } else if(e.key === 'Enter'){
+                                      e.preventDefault();
+                                      if(focused >= 0 && items[focused]){
+                                        items[focused].click();
+                                      } else {
+                                        // fallback search action - save & close
+                                        saveRecent(input.value.trim());
+                                        closeSearch();
+                                      }
+                                    } else if(e.key === 'Escape'){
+                                      closeSearch();
+                                    }
+                                  });
+
+                                  submit.addEventListener('click', ()=>{
+                                    saveRecent(input.value.trim());
+                                    // try to find exact match
+                                    const found = PAGES.find(p=>p.title.toLowerCase() === input.value.trim().toLowerCase());
+                                    if(found){
+                                      if(found.href.startsWith('#')){
+                                        const el = document.querySelector(found.href);
+                                        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+                                      } else window.location.href = found.href;
+                                    }
+                                    closeSearch();
+                                  });
+
+                                  // open/close hooks
+                                  openBtn && openBtn.addEventListener('click', function(e){ e.preventDefault(); openSearch(); });
+                                  closeBtn.addEventListener('click', closeSearch);
+                                  overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeSearch(); });
+
+                                  // keyboard shortcut (Ctrl/Cmd + K)
+                                  document.addEventListener('keydown', (e)=>{
+                                    if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k'){
+                                      e.preventDefault();
+                                      if(overlay.style.display === 'flex') closeSearch(); else openSearch();
+                                    }
+                                  });
+
+                                  // focus management on open: restore removed above, animate
+                                  // slight delay to apply open animation styles
+                                  const observer = new MutationObserver(()=>{/* noop - reserved for potential future focus trap */});
+                                  observer.observe(box, {attributes:true});
+
+                                  // expose for dev if needed
+                                  window._navSearchOpen = openSearch;
+                                  window._navSearchClose = closeSearch;
+                                })();
+                              </script>
                             </div>
 
                       
@@ -424,13 +647,33 @@ Access to agricultural information, Digital Marketplaces,
     </div>
 
     <div class="arrow" id="prevArrow">❮</div>
+    <style>
+        .partners-carousel-wrapper{ padding:10px 20px; }
+        .partners-carousel { display:flex; gap:20px; align-items:center; justify-content:center; overflow:hidden; }
+        .partner-logo { flex:0 0 auto; padding:12px; display:flex; align-items:center; justify-content:center; }
+        .partner-logo img { max-width:160px; height:auto; display:block; margin:0; }
+
+        /* Smaller spacing and images on small screens */
+        @media (max-width: 767px) {
+            .partners-carousel-wrapper{ padding:6px 10px; }
+            .partners-carousel { gap:12px; }
+            .partner-logo { padding:6px; }
+            .partner-logo img { max-width:300px; }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 420px) {
+            .partners-carousel { gap:8px; }
+            .partner-logo img { max-width:80px; }
+        }
+    </style>
 
     <div class="partners-carousel-wrapper">
-      <div class="partners-carousel " id="partnersCarousel">
-        <div class="partner-logo"><img src="https://kigaliselfdrive.com/wp-content/uploads/2023/06/2-2.png" alt="RDB"></div>
-        <div class="partner-logo"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7gfXnhyTtkCDWhknLxu4I8dhg8lSzt9b-8A&s" alt="RRA"></div>
-        <div class="partner-logo"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUlSEijHfIaqTOPRWllw34btnbotYerCm0fT9lqW-__wRmQU8IHoTITlHJ64VpBDEptjo&usqp=CAU" alt="RAB"></div>
-      </div>
+        <div class="partners-carousel" id="partnersCarousel" aria-label="Trusted institutions carousel">
+            <div class="partner-logo"><img src="https://kigaliselfdrive.com/wp-content/uploads/2023/06/2-2.png" alt="RDB"></div>
+            <div class="partner-logo"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7gfXnhyTtkCDWhknLxu4I8dhg8lSzt9b-8A&s" alt="RRA"></div>
+            <div class="partner-logo"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUlSEijHfIaqTOPRWllw34btnbotYerCm0fT9lqW-__wRmQU8IHoTITlHJ64VpBDEptjo&usqp=CAU" alt="RAB"></div>
+        </div>
     </div>
 
     <div class="arrow" id="nextArrow">❯</div>
@@ -656,8 +899,138 @@ Partner with us to shape your digital future with smart solutions that bridge te
 
 
 
+
+
+
+
+    <!-- Projects Start -->
+<!-- Products Section Start -->
+    <div class="container-fluid overflow-hidden my-5 px-lg-0" id="services">
+           <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 700px;">
+                <h6 class="text-primary">Our Services </h6>
+           
+               
+            </div>
+      <div class="container">
+        <div class="row g-4 align-items-start">
+          <!-- Left: IT Consulting primary card -->
+          <div class="col-lg-4">
+            <div style="background:#fff; border-radius:12px; padding:28px; box-shadow:0 6px 20px rgba(16,24,40,0.06); height:100%;">
+              <h5 class="mb-3">IT Consulting</h5>
+              <p class="lead text-dark" style="font-size: 0.95rem; font-weight:400;">
+                We help organizations unlock the full potential of technology through tailored IT consulting solutions. Our expertise covers the integration of digital interventions into sector-specific programs, ensuring technology drives measurable impact across industries. We leverage emerging technologies and data analytics to enhance decision-making, efficiency, and innovation.
+              </p>
+               <p class="lead text-dark" style="font-size: 0.95rem; font-weight:400;">
+                Our team conducts comprehensive IT audits, ensuring compliance, security, and quality assurance in every system we support. We also provide training and capacity building programs to empower teams with the skills needed to manage digital transformation effectively. With reliable IT technical support, we ensure seamless operations, optimized performance, and sustainable technology growth.
+              </p>
+               <a href="#about" class="btn  py-3 px-5 mt-4 animated slideInLeft">
+                                Read More
+
+                            </a>
+            </div>
+          </div>
+
+          <!-- Right: Six capabili</div>ty cards -->
+          <div class="col-lg-8 mb-5">
+         
+
+            <style>
+              .capabilities-grid { display: grid; gap: 16px; grid-template-columns: repeat(1, 1fr); }
+              .capability-card {
+                background: #fff;
+                border-radius: 12px;
+                padding: 18px;
+                box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+                transition: background-color 220ms ease, color 220ms ease, transform 160ms ease;
+                color: #222;
+                min-height: 160px;
+              }
+              .capability-card h5 { margin-bottom:8px; }
+              .capability-card .meta { color:#6c757d; font-size:0.86rem; margin-bottom:8px; }
+
+              /* Hover: green background and white text */
+              .capability-card:hover {
+                background: #74a404;
+                color: #fff;
+                transform: translateY(-4px);
+              }
+              .capability-card:hover .meta { color: rgba(255,255,255,0.8); }
+              .capability-card a { color: inherit; text-decoration: underline; }
+
+              /* Responsive grid */
+              @media (min-width: 576px) {
+                .capabilities-grid { grid-template-columns: repeat(2, 1fr); }
+              }
+              @media (min-width: 992px) {
+                .capabilities-grid { grid-template-columns: repeat(3, 1fr); }
+              }
+            </style>
+
+            <div class="capabilities-grid" role="list" aria-label="IT capabilities list">
+              <!-- 1 -->
+              <article class="capability-card" role="listitem">
+            
+                <h5 class="mb-3">Data, Advanced Analytics and Data Science</h5>
+                <p class="" style="font-size: 0.92rem; font-weight:400;">
+                  We help businesses turn data into strategic assets. Our experts harness advanced analytics, AI, and data science to uncover insights, optimize operations, and drive growth. From data strategy and visualization to predictive modeling and machine learning, we empower decision-makers with real-time intelligence that fuels innovation and competitive advantage.
+                </p>
+              </article>
+
+              <!-- 2 -->
+              <article class="capability-card" role="listitem">
+                <h5 class="mb-3">Emerging Technologies</h5>
+                <h5>AI, Blockchain, IoT & Cloud</h5>
+             <p class=" " style="font-size: 0.92rem; font-weight:400;">
+                  We help businesses stay ahead in the digital era by integrating cutting-edge technologies such as Artificial Intelligence, Blockchain, Internet of Things (IoT), and Cloud Computing. Our solutions drive innovation, improve efficiency, and create competitive advantages for sustainable growth.
+                </p>
+              </article>
+
+              <!-- 3 -->
+              <article class="capability-card" role="listitem">
+                <h5 class="mb-3">IT Audit, Compliance & Quality Assurance</h5>
+               
+              <p class="" style="font-size: 0.92rem; font-weight:400;">
+                  We help businesses strengthen their digital integrity through comprehensive IT audits, compliance checks, and quality assurance. Our experts assess your systems, identify risks, and ensure alignment with global standards—enhancing security, reliability, and performance.
+                </p>
+              </article>
+
+              <!-- 4 -->
+              <article class="capability-card " role="listitem">
+                <h5 class="mb-3">Cloud Computing & Cybersecurity</h5>
+        
+                 <p class=" " style="font-size: 0.92rem; font-weight:400;">
+                  Empower your business with secure, scalable, and efficient digital infrastructure. Our cloud solutions help private companies streamline operations, enhance collaboration, and reduce IT costs. Combined with advanced cybersecurity services, we protect your data, systems, and digital assets from evolving threats—ensuring business continuity and peace of mind.
+                </p>
+              </article>
+
+              <!-- 5 -->
+              <article class="capability-card " role="listitem">
+                <h5 class="mb-3 " >Training & Capacity Building</h5>
+           
+                 <p class="" style="font-size: 0.92rem; font-weight:400;">
+                  We empower organizations with practical, results-driven training programs that enhance digital skills, leadership, and operational excellence. Our tailored courses in IT systems, data management, and modern management practices equip teams to adapt, innovate, and perform efficiently in today’s fast-changing business environment.
+                </p>
+              </article>
+
+              <!-- 6 -->
+              <article class="capability-card " role="listitem">
+                <h5 class="mb-3">IT Technical Support</h5>
+              
+             <p class="" style="font-size: 0.92rem; font-weight:400;">
+                  Keep your business running smoothly with our reliable IT technical support services. We provide fast, proactive assistance to resolve technical issues, optimize system performance, and ensure uninterrupted operations — from troubleshooting and maintenance to network security and user support.
+                </p>
+              </article>
+            </div>
+
+            <!-- CTA -->
+         
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Service Start -->
-    <div class="container-fluid  overflow-hidden my-5 px-lg-0" style="background: url('img/bababa.png') center center/cover no-repeat; padding: 50px; ">
+    <div class="container-fluid  overflow-hidden my-5 px-lg-0" style="background: url('img/bababa.png') center center/cover no-repeat; padding: 50px; " id="products">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 900px;">
                 <h6 class="text-primary">IT Sector specific services</h6>
@@ -742,141 +1115,142 @@ Unlock the future of commerce with our end-to-end digital trade solutions. From 
             </div>
         </div>
     </div>
+   
+    <!-- Service End -->
+    <section id="management" class="container-fluid py-5" style="background:#ffffff;">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <!-- Left: Intro -->
+                <div class="col-lg-6">
+                    <h6 class="text-primary">Management services</h6>
+                    <h2 class="mb-4 fw-bold" style="font-size:2.5rem; letter-spacing:-1px;">
+                        Management Consulting services: Empowering Businesses, Transforming Futures
+                    </h2>
+                    <p class="text-dark mb-4" style="line-height:1.6;">
+                        We empower private companies to achieve sustainable growth and operational excellence through tailored management consulting solutions.
+                        Our multidisciplinary team combines strategic insight, data-driven analysis, and practical execution to help organizations thrive in a competitive business environment.
+                    </p>
+
+                    <p class="text-muted mb-3" style="line-height:1.5;">
+                        Our expertise spans Financial &amp; Business Advisory, helping organizations strengthen financial performance, manage risks, and optimize investments.
+                        Through Operations &amp; Process Improvement, we streamline workflows, enhance efficiency, and reduce costs. In Marketing &amp; Sales Consulting, we support market expansion,
+                        customer engagement, and revenue growth through data-driven strategies.
+                    </p>
+
+                    <p class="mb-4" style="color:#222; line-height:1.5;">
+                        We deliver Strategy &amp; Governance solutions that align business models with long-term goals and compliance standards, while our Digital Transformation services help organizations
+                        leverage technology to innovate and modernize operations. Additionally, our Supply Chain Optimization solutions ensure seamless procurement, logistics, and delivery processes that
+                        enhance reliability and profitability.
+                    </p>
+
+                    <a href="#contact" class="btn" style="background:#74a404; color:#fff; font-weight:600; padding:10px 20px; border-radius:8px;">
+                        Talk to our Consultants
+                    </a>
+                </div>
+
+                <!-- Right: Modern feature cards -->
+                <div class="col-lg-6">
+                    <style>
+                        .mgmt-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+                        .mgmt-card {
+                            background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+                            border-radius:12px;
+                            padding:18px;
+                            box-shadow: 0 8px 28px rgba(17,40,179,0.06);
+                            transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+                            min-height:120px;
+                            display:flex;
+                            gap:14px;
+                            align-items:flex-start;
+                            color: #222;
+                        }
+                        /* Hover: solid green background + white text */
+                        .mgmt-card:hover {
+                            transform: translateY(-6px);
+                            box-shadow: 0 18px 40px rgba(17,40,179,0.12);
+                            background: #74a404;
+                            color: #ffffff;
+                        }
+                        .mgmt-icon {
+                            width:56px;
+                            height:56px;
+                            border-radius:10px;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            background:#f1f6ff;
+                            flex:0 0 56px;
+                            font-size:1.2rem;
+                            color:#1128B3;
+                            transition: background .18s ease, color .18s ease;
+                        }
+                        /* Icon style on hover to ensure contrast */
+                        .mgmt-card:hover .mgmt-icon {
+                            background: rgba(255,255,255,0.14);
+                            color: #fff;
+                        }
+                        .mgmt-card h5 { margin:0 0 6px 0; font-size:1rem; }
+                        .mgmt-card p { margin:0; font-size:0.9rem; color:#58616a; line-height:1.35; }
+                        .mgmt-card:hover p { color:#ffffff; }
+                        .mgmt-card:hover h5 { color:#ffffff; }
+                        @media (max-width:767px){ .mgmt-grid{grid-template-columns:1fr;} .mgmt-icon{width:48px;height:48px;}}
+                    </style>
+
+                    <div class="mgmt-grid" role="list" aria-label="Management services list">
+                        <article class="mgmt-card" role="listitem" aria-labelledby="s1">
+                            <div class="mgmt-icon" aria-hidden="true">
+                                <i class="fa fa-bullseye"></i>
+                            </div>
+                            <div>
+                                <h5 id="s1">Strategy &amp; Governance</h5>
+                                <p>Design strategic frameworks and corporate governance structures that align vision, leadership, and performance. Support executive teams with policies and accountability systems for effective decision-making.</p>
+                            </div>
+                        </article>
+
+                        <article class="mgmt-card" role="listitem" aria-labelledby="s2">
+                            <div class="mgmt-icon" aria-hidden="true">
+                                <i class="fa fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <h5 id="s2">Financial &amp; Business advisory</h5>
+                                <p>Expert guidance in financial planning, budgeting, investment analysis, and performance management to optimize capital structures and ensure sound long-term decision-making.</p>
+                            </div>
+                        </article>
+
+                        <article class="mgmt-card" role="listitem" aria-labelledby="s3">
+                            <div class="mgmt-icon" aria-hidden="true">
+                                <i class="fa fa-cogs"></i>
+                            </div>
+                            <div>
+                                <h5 id="s3">Operations &amp; Process Improvement</h5>
+                                <p>Streamline business operations through process re-engineering, performance optimization, and workflow automation to reduce costs and boost productivity.</p>
+                            </div>
+                        </article>
+
+                        <article class="mgmt-card" role="listitem" aria-labelledby="s4">
+                            <div class="mgmt-icon" aria-hidden="true">
+                                <i class="fa fa-laptop-code"></i>
+                            </div>
+                            <div>
+                                <h5 id="s4">Digital Transformation</h5>
+                                <p>Help companies embrace innovation with digital tools, automation, and data analytics that modernize operations, enhance customer experience, and unlock new opportunities.</p>
+                            </div>
+                        </article>
+
+                        <article class="mgmt-card" role="listitem" aria-labelledby="s5" style="grid-column: 1 / -1;">
+                            <div class="mgmt-icon" aria-hidden="true">
+                                <i class="fa fa-truck"></i>
+                            </div>
+                            <div>
+                                <h5 id="s5">Supply Chain Optimization</h5>
+                                <p>Deliver solutions for seamless procurement, logistics, and delivery processes that improve reliability, reduce cost, and increase profitability across the value chain.</p>
+                            </div>
+                        </article>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Service End -->
-
-
-
-
-    <!-- Projects Start -->
-<!-- Products Section Start -->
-    <div class="container-fluid overflow-hidden my-5 px-lg-0">
-           <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 700px;">
-                <h6 class="text-primary">Our Services </h6>
-           
-               
-            </div>
-      <div class="container">
-        <div class="row g-4 align-items-start">
-          <!-- Left: IT Consulting primary card -->
-          <div class="col-lg-4">
-            <div style="background:#fff; border-radius:12px; padding:28px; box-shadow:0 6px 20px rgba(16,24,40,0.06); height:100%;">
-              <h5 class="mb-3">IT Consulting</h5>
-              <p style="color:#333; line-height:1.5; font-size:0.95rem;">
-                We help organizations unlock the full potential of technology through tailored IT consulting solutions. Our expertise covers the integration of digital interventions into sector-specific programs, ensuring technology drives measurable impact across industries. We leverage emerging technologies and data analytics to enhance decision-making, efficiency, and innovation.
-              </p>
-              <p style="color:#333; line-height:1.5; font-size:0.95rem;">
-                Our team conducts comprehensive IT audits, ensuring compliance, security, and quality assurance in every system we support. We also provide training and capacity building programs to empower teams with the skills needed to manage digital transformation effectively. With reliable IT technical support, we ensure seamless operations, optimized performance, and sustainable technology growth.
-              </p>
-               <a href="#ab</div>out" class="btn  py-3 px-5 mt-4 animated slideInLeft">
-                                Read More 
-
-                            </a>
-            </div>
-          </div>
-
-          <!-- Right: Six capabili</div>ty cards -->
-          <div class="col-lg-8">
-         
-
-            <style>
-              .capabilities-grid { display: grid; gap: 16px; grid-template-columns: repeat(1, 1fr); }
-              .capability-card {
-                background: #fff;
-                border-radius: 12px;
-                padding: 18px;
-                box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-                transition: background-color 220ms ease, color 220ms ease, transform 160ms ease;
-                color: #222;
-                min-height: 160px;
-              }
-              .capability-card h5 { margin-bottom:8px; }
-              .capability-card .meta { color:#6c757d; font-size:0.86rem; margin-bottom:8px; }
-
-              /* Hover: green background and white text */
-              .capability-card:hover {
-                background: #74a404;
-                color: #fff;
-                transform: translateY(-4px);
-              }
-              .capability-card:hover .meta { color: rgba(255,255,255,0.8); }
-              .capability-card a { color: inherit; text-decoration: underline; }
-
-              /* Responsive grid */
-              @media (min-width: 576px) {
-                .capabilities-grid { grid-template-columns: repeat(2, 1fr); }
-              }
-              @media (min-width: 992px) {
-                .capabilities-grid { grid-template-columns: repeat(3, 1fr); }
-              }
-            </style>
-
-            <div class="capabilities-grid" role="list" aria-label="IT capabilities list">
-              <!-- 1 -->
-              <article class="capability-card" role="listitem">
-            
-                <h5 class="mb-3">Data, Advanced Analytics and Data Science</h5>
-                <p style="margin:0; font-size:0.92rem; line-height:1.35;">
-                  We help businesses turn data into strategic assets. Our experts harness advanced analytics, AI, and data science to uncover insights, optimize operations, and drive growth. From data strategy and visualization to predictive modeling and machine learning, we empower decision-makers with real-time intelligence that fuels innovation and competitive advantage.
-                </p>
-              </article>
-
-              <!-- 2 -->
-              <article class="capability-card" role="listitem">
-                <h5 class="mb-3">Emerging Technologies</h5>
-                <h5>AI, Blockchain, IoT & Cloud</h5>
-                <p style="margin:0; font-size:0.92rem; line-height:1.35;">
-                  We help businesses stay ahead in the digital era by integrating cutting-edge technologies such as Artificial Intelligence, Blockchain, Internet of Things (IoT), and Cloud Computing. Our solutions drive innovation, improve efficiency, and create competitive advantages for sustainable growth.
-                </p>
-              </article>
-
-              <!-- 3 -->
-              <article class="capability-card" role="listitem">
-                <h5 class="mb-3">IT Audit, Compliance & Quality Assurance</h5>
-               
-                <p style="margin:0; font-size:0.92rem; line-height:1.35;">
-                  We help businesses strengthen their digital integrity through comprehensive IT audits, compliance checks, and quality assurance. Our experts assess your systems, identify risks, and ensure alignment with global standards—enhancing security, reliability, and performance.
-                </p>
-              </article>
-
-              <!-- 4 -->
-              <article class="capability-card" role="listitem">
-                <h5 class="mb-3">Cloud Computing & Cybersecurity</h5>
-        
-                <p style="margin:0; font-size:0.92rem; line-height:1.35;">
-                  Empower your business with secure, scalable, and efficient digital infrastructure. Our cloud solutions help private companies streamline operations, enhance collaboration, and reduce IT costs. Combined with advanced cybersecurity services, we protect your data, systems, and digital assets from evolving threats—ensuring business continuity and peace of mind.
-                </p>
-              </article>
-
-              <!-- 5 -->
-              <article class="capability-card" role="listitem">
-                <h5 class="mb-3 " >Training & Capacity Building</h5>
-           
-                <p style="margin:0; font-size:0.92rem; line-height:1.35;">
-                  We empower organizations with practical, results-driven training programs that enhance digital skills, leadership, and operational excellence. Our tailored courses in IT systems, data management, and modern management practices equip teams to adapt, innovate, and perform efficiently in today’s fast-changing business environment.
-                </p>
-              </article>
-
-              <!-- 6 -->
-              <article class="capability-card" role="listitem">
-                <h5 class="mb-3">IT Technical Support</h5>
-              
-                <p style="margin:0; font-size:0.92rem; line-height:1.35;">
-                  Keep your business running smoothly with our reliable IT technical support services. We provide fast, proactive assistance to resolve technical issues, optimize system performance, and ensure uninterrupted operations — from troubleshooting and maintenance to network security and user support.
-                </p>
-              </article>
-            </div>
-
-            <!-- CTA -->
-         
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
+    </section>
 <!-- Products Section End -->
     <!-- Projects End -->
 
