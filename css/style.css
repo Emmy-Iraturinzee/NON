@@ -1045,4 +1045,13 @@ body {
              }
             .product-visual { height:320px; }
         }
-       
+       /*  */
+          /* optional subtle dark overlay so particles remain visible over images */
+            .page-header::after{
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: rgba(0,0,0,0.18);
+                z-index: 0;
+                pointer-events: none;
+            }

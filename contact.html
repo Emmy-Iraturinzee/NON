@@ -77,24 +77,138 @@
                 <a href="contact.html" class="nav-item nav-link">Blog</a>
             </div>
             
-            <a href="" class="btn btn-primary  py-4 px-lg-5 d-none d-lg-block"  >CONTACT US<i class="fa fa-arrow-right ms-3"></i></a>
+            <a href="contact.html" class="btn   py-4 px-lg-5 d-none d-lg-block" style="font-size: 12px; background-color: #74a404; color: white;"  >CONTACT US<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
     <!-- Navbar End -->
 
 
     <!-- Page Header Start -->
-    <div class="container-fluid page-header py-5 mb-5">
-        <div class="container py-5">
+    <div class="container-fluid page-header py-5 mb-5" style="position:relative;overflow:hidden;">
+        <!-- Particle canvas -->
+        <canvas id="headerParticles" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
+        <div class="container py-5" style="position:relative;z-index:1;">
             <h1 class="display-3 text-white mb-3 animated slideInDown">Contact</h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                 
                     <li class="breadcrumb-item text-white active" aria-current="page">Contact</li>
                 </ol>
             </nav>
         </div>
+
+        <style>
+            /* optional subtle dark overlay so particles remain visible over images */
+            .page-header::after{
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: rgba(0,0,0,0.18);
+                z-index: 0;
+                pointer-events: none;
+            }
+        </style>
+
+        <script>
+            (function(){
+                const canvas = document.getElementById('headerParticles');
+                if(!canvas) return;
+                const ctx = canvas.getContext('2d');
+
+                let width = 0, height = 0, particles = [];
+
+                function resize(){
+                    const dpr = window.devicePixelRatio || 1;
+                    width = canvas.clientWidth || canvas.width;
+                    height = canvas.clientHeight || canvas.height;
+                    canvas.width = Math.floor((canvas.offsetWidth) * dpr);
+                    canvas.height = Math.floor((canvas.offsetHeight) * dpr);
+                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                    initParticles();
+                }
+
+                function rand(min, max){ return Math.random() * (max - min) + min; }
+
+                function initParticles(){
+                    particles = [];
+                    const area = (canvas.offsetWidth || 800) * (canvas.offsetHeight || 200);
+                    const count = Math.min(140, Math.max(30, Math.floor(area / 6000)));
+                    for(let i=0;i<count;i++){
+                        particles.push({
+                            x: rand(0, canvas.offsetWidth),
+                            y: rand(0, canvas.offsetHeight),
+                            r: rand(0.8, 3.2),
+                            vx: rand(-0.25, 0.25),
+                            vy: rand(-0.15, 0.15),
+                            alpha: rand(0.3, 0.9)
+                        });
+                    }
+                }
+
+                function step(){
+                    ctx.clearRect(0,0,canvas.offsetWidth, canvas.offsetHeight);
+
+                    // draw connections
+                    const threshold = 90;
+                    for(let i=0;i<particles.length;i++){
+                        const p = particles[i];
+                        for(let j=i+1;j<particles.length;j++){
+                            const q = particles[j];
+                            const dx = p.x - q.x;
+                            const dy = p.y - q.y;
+                            const dist = Math.sqrt(dx*dx + dy*dy);
+                            if(dist < threshold){
+                                const t = 1 - dist / threshold;
+                                ctx.strokeStyle = 'rgba(255,255,255,' + (0.08 * t) + ')';
+                                ctx.lineWidth = 1 * t;
+                                ctx.beginPath();
+                                ctx.moveTo(p.x, p.y);
+                                ctx.lineTo(q.x, q.y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+
+                    // draw particles and update
+                    for(const p of particles){
+                        p.x += p.vx;
+                        p.y += p.vy;
+
+                        // wrap around
+                        if(p.x < -10) p.x = canvas.offsetWidth + 10;
+                        if(p.x > canvas.offsetWidth + 10) p.x = -10;
+                        if(p.y < -10) p.y = canvas.offsetHeight + 10;
+                        if(p.y > canvas.offsetHeight + 10) p.y = -10;
+
+                        ctx.beginPath();
+                        ctx.fillStyle = 'rgba(255,255,255,' + p.alpha + ')';
+                        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+
+                    requestAnimationFrame(step);
+                }
+
+                // initialize when DOM ready
+                function init(){
+                    resize();
+                    window.addEventListener('resize', () => {
+                        // throttle resize with requestAnimationFrame
+                        if(this._resizeRAF) cancelAnimationFrame(this._resizeRAF);
+                        this._resizeRAF = requestAnimationFrame(resize);
+                    });
+                    requestAnimationFrame(step);
+                }
+
+                // If element sizes are not yet set, delay init slightly
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', init);
+                } else {
+                    init();
+                }
+            })();
+        </script>
     </div>
     <!-- Page Header End -->
    <style>
@@ -189,7 +303,7 @@
 
 
     <!-- Footer Start -->
-  <div class="container-fluid  text-body footer  pt-5 wow fadeIn" data-wow-delay="0.1s" style="background-color: #011A41;">
+ <div class="container-fluid  text-body footer  pt-5 wow fadeIn" data-wow-delay="0.1s" >
         <div class="container py-5">
             <div class="row g-5">
             <!-- About Company -->
@@ -199,9 +313,9 @@
                 Now or Never LTD empowers Africa's digital future through innovative technology, expert consulting, and a passion for sustainable impact. We help organizations transform, grow, and thrive in a rapidly changing world.
                 </p>
                 <div class="d-flex mb-3">
-                <a class="btn btn-square btn-outline-light btn-social me-2" href="#"><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-square btn-outline-light btn-social me-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-square btn-outline-light btn-social me-2" href="#"><i class="fab fa-instagram"></i></a>
+                <a class="btn btn-square  btn-social me-2" href="#"><i class="fab fa-twitter"></i></a>
+                <a class="btn btn-square  btn-social me-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-square  btn-social me-2" href="#"><i class="fab fa-instagram"></i></a>
                 <a class="btn btn-square btn-outline-light btn-social" href="#"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
@@ -230,7 +344,7 @@
             </div>
             </div>
         </div>
-        <div class="container-fluid bg-secondary text-center py-3" style="background: #0a1628 !important;">
+        <div class="container-fluid bg-secondary text-center py-3" style="background: #00000000 !important;">
             <span class="text-white-50">&copy; <span class="fw-bold">Now or Never LTD</span>, All Rights Reserved.</span>
         </div>
     </div>

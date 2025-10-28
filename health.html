@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>NoN - E-health</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500&family=Sora:wght@500;700;900&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+  
+
+
+    <!-- Navbar Start -->
+   <nav id="mainNavbar" class="navbar navbar-expand-lg navbar-light sticky-top p-0" style="background: white; transition: background 0.3s;">
+        <a href="index.html" class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
+            <img src="img/Logoo.png" alt="Now or Never LTD Logo" style="height: 100px;">
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="index.html" class="nav-item nav-link ">Home</a>
+                <a href="index.html" class="nav-item nav-link">About</a>
+                <a href="" class="nav-item nav-link active">Our Service</a>
+                <a href="" class="nav-item nav-link">Our Products</a>
+                <!-- Login Button in Navbar -->
+                <!-- <a href="#" id="loginLink" class="nav-item nav-link">Login</a> -->
+                <!-- <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <div class="dropdown-menu bg-light m-0">
+                        <a href="feature.html" class="dropdown-item">Feature</a>
+                        <a href="quote.html" class="dropdown-item">Free Quote</a>
+                        <a href="team.html" class="dropdown-item">Our Team</a>
+                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        <a href="404.html" class="dropdown-item">404 Page</a>
+                    </div>
+                </div> -->
+                <a href="contact.html" class="nav-item nav-link">Blog</a>
+                            <!-- Search icon in navbar -->
+                            <a href="#" id="navSearchBtn" class="nav-item nav-link" role="button" aria-label="Open search" style="cursor:pointer;">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </a>
+
+                            <!-- Floating search + overlay (placed inside navbar collapse so it loads with the page) -->
+                            <div id="navSearchOverlay" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,0.6); align-items:center; justify-content:center; padding:20px; box-sizing:border-box;">
+                              <div id="navSearchBox" role="dialog" aria-modal="true" aria-label="Site search"
+                                   style="background:#fff; width:clamp(320px,70%,900px); margin:0 20px; border-radius:10px; padding:18px; box-shadow:0 10px 40px rgba(0,0,0,0.4);">
+                                <div style="display:flex; gap:8px; align-items:center;">
+                                  <input id="navSearchInput" type="search" placeholder="Search the site..." autofocus
+                                         style="flex:1; border:1px solid #e6e6e6; border-radius:8px; padding:12px 14px; font-size:1rem; outline:none;">
+                                  <button id="navSearchSubmit" class="btn btn-primary" style="padding:10px 14px; font-weight:600;">
+                                    <i class="fa fa-search"></i>
+                                  </button>
+                               
+                                </div>
+                              </div>
+                            </div>
+
+                      
+            </div>
+            
+            <a href="contact.html" class="btn   py-4 px-lg-5 d-none d-lg-block" style="font-size: 12px; background-color: #74a404; color: white;"  >CONTACT US<i class="fa fa-arrow-right ms-3"></i></a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5" style="position:relative;overflow:hidden;">
+    <canvas id="headerParticles" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
+        <div class="container py-5">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">E-Health</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">E-Health</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+  <style>
+            /* optional subtle dark overlay so particles remain visible over images */
+            .page-header::after{
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: rgba(0,0,0,0.18);
+                z-index: 0;
+                pointer-events: none;
+            }
+        </style>
+
+        <script>
+            (function(){
+                const canvas = document.getElementById('headerParticles');
+                if(!canvas) return;
+                const ctx = canvas.getContext('2d');
+
+                let width = 0, height = 0, particles = [];
+
+                function resize(){
+                    const dpr = window.devicePixelRatio || 1;
+                    width = canvas.clientWidth || canvas.width;
+                    height = canvas.clientHeight || canvas.height;
+                    canvas.width = Math.floor((canvas.offsetWidth) * dpr);
+                    canvas.height = Math.floor((canvas.offsetHeight) * dpr);
+                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                    initParticles();
+                }
+
+                function rand(min, max){ return Math.random() * (max - min) + min; }
+
+                function initParticles(){
+                    particles = [];
+                    const area = (canvas.offsetWidth || 800) * (canvas.offsetHeight || 200);
+                    const count = Math.min(140, Math.max(30, Math.floor(area / 6000)));
+                    for(let i=0;i<count;i++){
+                        particles.push({
+                            x: rand(0, canvas.offsetWidth),
+                            y: rand(0, canvas.offsetHeight),
+                            r: rand(0.8, 3.2),
+                            vx: rand(-0.25, 0.25),
+                            vy: rand(-0.15, 0.15),
+                            alpha: rand(0.3, 0.9)
+                        });
+                    }
+                }
+
+                function step(){
+                    ctx.clearRect(0,0,canvas.offsetWidth, canvas.offsetHeight);
+
+                    // draw connections
+                    const threshold = 90;
+                    for(let i=0;i<particles.length;i++){
+                        const p = particles[i];
+                        for(let j=i+1;j<particles.length;j++){
+                            const q = particles[j];
+                            const dx = p.x - q.x;
+                            const dy = p.y - q.y;
+                            const dist = Math.sqrt(dx*dx + dy*dy);
+                            if(dist < threshold){
+                                const t = 1 - dist / threshold;
+                                ctx.strokeStyle = 'rgba(255,255,255,' + (0.08 * t) + ')';
+                                ctx.lineWidth = 1 * t;
+                                ctx.beginPath();
+                                ctx.moveTo(p.x, p.y);
+                                ctx.lineTo(q.x, q.y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+
+                    // draw particles and update
+                    for(const p of particles){
+                        p.x += p.vx;
+                        p.y += p.vy;
+
+                        // wrap around
+                        if(p.x < -10) p.x = canvas.offsetWidth + 10;
+                        if(p.x > canvas.offsetWidth + 10) p.x = -10;
+                        if(p.y < -10) p.y = canvas.offsetHeight + 10;
+                        if(p.y > canvas.offsetHeight + 10) p.y = -10;
+
+                        ctx.beginPath();
+                        ctx.fillStyle = 'rgba(255,255,255,' + p.alpha + ')';
+                        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+
+                    requestAnimationFrame(step);
+                }
+
+                // initialize when DOM ready
+                function init(){
+                    resize();
+                    window.addEventListener('resize', () => {
+                        // throttle resize with requestAnimationFrame
+                        if(this._resizeRAF) cancelAnimationFrame(this._resizeRAF);
+                        this._resizeRAF = requestAnimationFrame(resize);
+                    });
+                    requestAnimationFrame(step);
+                }
+
+                // If element sizes are not yet set, delay init slightly
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', init);
+                } else {
+                    init();
+                }
+            })();
+        </script>
+
+    <!-- Digital Solutions Section Start -->
+    <div class="container-fluid py-6 wow fadeIn" data-wow-delay="0.1s" >
+        <style>
+            /* Section-specific styles */
+            #eagri-section .feature-card {  overflow: hidden; transition: transform .35s ease, box-shadow .35s ease; }
+            #eagri-section .feature-card:hover { transform: translateY(-8px);  }
+            #eagri-section .img-zoom { transition: transform .6s ease; }
+            #eagri-section .img-zoom:hover { transform: scale(1.06); }
+            #eagri-section .pill { background: linear-gradient(90deg,#73b70e,#b7de34); color:#fff; padding:6px 12px; border-radius:999px; font-weight:700; display:inline-flex; align-items:center; gap:8px; }
+            #eagri-section .stat { font-size:1.9rem; font-weight:800; color:#2a6a05; }
+            #eagri-section .stat-label { color:#5b5b5b; font-size:.95rem; }
+            #eagri-section .read-more-toggle { cursor:pointer; color:#2a6a05; font-weight:600; text-decoration:underline; }
+            @media (max-width: 767px) {
+                #eagri-section .stat { font-size:1.5rem; }
+            }
+        </style>
+
+        <div id="eagri-section" class="container">
+            <div class="text-center mb-5">
+                <!-- <div class="pill mx-auto mb-3 mt-5"><i class="fas fa-heartbeat" aria-hidden="true"></i> E-Health</div> -->
+                <h2 class="fw-bold">Transforming Healthcare Through Digital Innovation</h2>
+                <p class="text-muted mx-auto" style="max-width:900px; font-size:1.05rem;">
+We empower healthcare providers with cutting-edge Digital Health (eHealth) solutions that redefine patient care. From Telemedicine and Telehealth to Mobile Health (mHealth), Electronic Health Records (EHRs), AI-powered insights, and advanced Health Data Analytics, our solutions streamline operations, enhance decision-making, and improve patient outcomes. Partner with us to harness the power of digital health systems and drive a smarter, more connected healthcare experience.                 </p>
+            </div>
+
+            <div class="row g-4 align-items-stretch mb-5 mt-5">
+                <!-- Left: image collage / carousel -->
+                <div class="col-lg-6">
+                    <div id="eAgriCarousel" class="carousel slide feature-card h-100" data-bs-ride="carousel" data-bs-interval="4200" aria-label="Agriculture images carousel">
+                        <div class="carousel-inner h-100">
+                            <div class="carousel-item active h-100">
+                                <img src="img/ehealth.jpeg" class="d-block w-100 img-fluid img-zoom" style="height:100%; object-fit:cover;" alt="Farmers in field">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="img/ehealth.jpeg" class="d-block w-100 img-fluid img-zoom" style="height:100%; object-fit:cover;" alt="Market access">
+                            </div>
+                            <div class="carousel-item h-100">
+                                <img src="img/ehealth.jpeg" class="d-block w-100 img-fluid img-zoom" style="height:100%; object-fit:cover;" alt="Agri technology">
+                            </div>
+                        </div>
+                        
+                    </div>
+
+            
+                </div>
+
+                <!-- Right: content + features -->
+                <div class="col-lg-6">
+                    <style>
+                        /* Modernized right column styles (scoped) */
+                        #eagri-section .feature-card.modern { background: #ffffff; border-radius: 14px; padding: 22px; }
+                        #eagri-section .feature-list .icon {
+                            width:46px; height:46px; display:inline-flex; align-items:center; justify-content:center;
+                            border-radius:10px; color:#fff; margin-right:14px; flex-shrink:0;
+                            background: linear-gradient(135deg,#6fb90b 0%,#bfdc3a 100%);
+                            box-shadow: 0 6px 18px rgba(107,153,12,0.14);
+                        }
+                        #eagri-section .feature-item { display:flex; gap:0.5rem; align-items:flex-start; padding:12px 0; border-bottom:1px solid #f1f3f5; }
+                        #eagri-section .feature-item:last-child { border-bottom: none; }
+                        #eagri-section .feature-item h6 { margin:0; font-weight:700; color:#2a6a05; font-size:1rem; }
+                        #eagri-section .feature-item p { margin:4px 0 0; color:#6b6f76; font-size:0.95rem; }
+                        #eagri-section .stats-row { gap:12px; }
+                        #eagri-section .stat-card { background: linear-gradient(180deg,#f8fff0,#ffffff); border-radius:10px; padding:14px; text-align:center;  }
+                        #eagri-section .stat { font-size:1.6rem; font-weight:800; color:#2a6a05; }
+                        #eagri-section .stat-label { font-size:0.85rem; color:#6b6f76; margin-top:4px; display:block; }
+                    </style>
+
+                    <div class="feature-card modern h-100">
+                        <div class="d-flex flex-column h-100">
+                            <div class="mb-3">
+                                <h5 class="fw-bold" style="color:#2a6a05;">Digital Health</h5>
+                                <p class="text-muted mb-1">
+                                    Transforming Healthcare Through Digital Innovation: We empower healthcare providers with cutting-edge Digital Health (eHealth) solutions that redefine patient care. From Telemedicine and Telehealth to Mobile Health (mHealth), Electronic Health Records (EHRs), AI-powered insights, and advanced Health Data Analytics, our solutions streamline operations, enhance decision-making, and improve patient outcomes.
+                                </p>
+                                <div>
+                                    <a class="read-more-toggle" data-bs-toggle="collapse" href="#moreEHealth" role="button" aria-expanded="false" aria-controls="moreEHealth">Read more..</a>
+                                </div>
+                            </div>
+
+                            <div class="feature-list mt-3">
+                                <div class="feature-item">
+                                    <div class="icon" aria-hidden="true"><i class="fas fa-video"></i></div>
+                                    <div>
+                                        <h6>Telemedicine & Telehealth</h6>
+                                        <p>Remote consultations, follow-ups and prescriptions via video, chat or phone—reducing the need for physical clinic visits.</p>
+                                    </div>
+                                </div>
+
+                                <div class="feature-item">
+                                    <div class="icon" aria-hidden="true"><i class="fas fa-wifi"></i></div>
+                                    <div>
+                                        <h6>Wearable Health Devices</h6>
+                                        <p>Fitness trackers, smartwatches and medical sensors that monitor vitals and enable real‑time tracking and early detection.</p>
+                                    </div>
+                                </div>
+
+                                <div class="feature-item">
+                                    <div class="icon" aria-hidden="true"><i class="fas fa-mobile-alt"></i></div>
+                                    <div>
+                                        <h6>Mobile Health (mHealth)</h6>
+                                        <p>Apps and mobile platforms for health information, medication reminders and disease management to boost engagement and self‑care.</p>
+                                    </div>
+                                </div>
+
+                                <div class="feature-item">
+                                    <div class="icon" aria-hidden="true"><i class="fas fa-file-medical"></i></div>
+                                    <div>
+                                        <h6>Electronic Health Records (EHRs)</h6>
+                                        <p>Secure digital records that enable accurate data sharing across providers, reducing duplication and improving care continuity.</p>
+                                    </div>
+                                </div>
+
+                                <div class="feature-item">
+                                    <div class="icon" aria-hidden="true"><i class="fas fa-robot"></i></div>
+                                    <div>
+                                        <h6>AI & Machine Learning</h6>
+                                        <p>AI-driven diagnostics, personalized treatment planning, predictive analytics and assistance for advanced procedures.</p>
+                                    </div>
+                                </div>
+
+                                <div class="feature-item">
+                                    <div class="icon" aria-hidden="true"><i class="fas fa-chart-pie"></i></div>
+                                    <div>
+                                        <h6>Health Data Analytics</h6>
+                                        <p>Big-data insights to detect trends, guide public health policy, monitor outbreaks and improve population health outcomes.</p>
+                                    </div>
+                                </div>
+
+                                <div class="feature-item">
+                                    <div class="icon" aria-hidden="true"><i class="fas fa-hospital"></i></div>
+                                    <div>
+                                        <h6>Health Systems</h6>
+                                        <p>Integrated health system design and interoperability solutions to make care delivery more efficient and responsive.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="collapse mt-3" id="moreEHealth">
+                                <div class="card card-body border-0 px-3 py-2" style="background:#fbfef8;">
+                                    <p class="mb-1" style="color:#54585b;">
+                                        Partner with us to harness the power of digital health systems and drive a smarter, more connected healthcare experience. Our services include solution design, low‑bandwidth and offline-capable implementations, local payment integrations, data security & compliance, and tailored pilots for hospitals, clinics and community health programs.
+                                    </p>
+                                    <a href="contact.html" class="text-success fw-semibold" style="text-decoration:underline;">Request a demo / pilot &raquo;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Simple counter animation when visible
+            (function() {
+                const stats = document.querySelectorAll('#eagri-section .stat');
+                if (!('IntersectionObserver' in window)) {
+                    stats.forEach(s => s.textContent = s.getAttribute('data-target'));
+                    return;
+                }
+                const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+                const io = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting) return;
+                        const el = entry.target;
+                        const target = parseInt(el.getAttribute('data-target') || '0', 10);
+                        const duration = 1400;
+                        const start = performance.now();
+                        requestAnimationFrame(function step(now) {
+                            const t = Math.min(1, (now - start) / duration);
+                            el.textContent = Math.floor(easeOut(t) * target).toLocaleString();
+                            if (t < 1) requestAnimationFrame(step);
+                        });
+                        obs.unobserve(el);
+                    });
+                }, { threshold: 0.4 });
+                stats.forEach(s => io.observe(s));
+            })();
+        </script>
+    </div>
+    <!-- Digital Solutions Section End -->
+        
+
+    <!-- Footer Start -->
+    <div class="container-fluid  text-body footer  pt-5 wow fadeIn" data-wow-delay="0.1s" >
+        <div class="container py-5">
+            <div class="row g-5">
+            <!-- About Company -->
+            <div class="col-lg-4 col-md-6">
+                <h4 class="text-white mb-4 fw-bold">About Now or Never LTD</h4>
+                <p class="text-white-50 mb-3">
+                Now or Never LTD empowers Africa's digital future through innovative technology, expert consulting, and a passion for sustainable impact. We help organizations transform, grow, and thrive in a rapidly changing world.
+                </p>
+                <div class="d-flex mb-3">
+                <a class="btn btn-square  btn-social me-2" href="#"><i class="fab fa-twitter"></i></a>
+                <a class="btn btn-square  btn-social me-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-square  btn-social me-2" href="#"><i class="fab fa-instagram"></i></a>
+                <a class="btn btn-square btn-outline-light btn-social" href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <!-- Quick Links -->
+            <div class="col-lg-4 col-md-6">
+                <h4 class="text-white mb-4 fw-bold">Quick Links</h4>
+                <ul class="list-unstyled mb-0">
+                <li class="mb-2"><a href="about.html" class="text-white-50 text-decoration-none"><i class="fa fa-angle-right text-primary me-2"></i>About Us</a></li>
+                <li class="mb-2"><a href="service.html" class="text-white-50 text-decoration-none"><i class="fa fa-angle-right text-primary me-2"></i>Our Services</a></li>
+                <li class="mb-2"><a href="project.html" class="text-white-50 text-decoration-none"><i class="fa fa-angle-right text-primary me-2"></i>Projects</a></li>
+                <li class="mb-2"><a href="team.html" class="text-white-50 text-decoration-none"><i class="fa fa-angle-right text-primary me-2"></i>Our Team</a></li>
+                <li class="mb-2"><a href="contact.html" class="text-white-50 text-decoration-none"><i class="fa fa-angle-right text-primary me-2"></i>Contact</a></li>
+                <li class="mb-2"><a href="quote.html" class="text-white-50 text-decoration-none"><i class="fa fa-angle-right text-primary me-2"></i>Get a Quote</a></li>
+                </ul>
+            </div>
+            <!-- Contact Info -->
+            <div class="col-lg-4 col-md-12">
+                <h4 class="text-white mb-4 fw-bold">Contact Us</h4>
+                <p class="mb-2 text-white-50"><i class="fa fa-map-marker-alt text-primary me-2"></i>KN 3RD, 2nd Floor, Fides Platia (Omega House), Near M-Hotel, Kigali, Rwanda</p>
+                <p class="mb-2 text-white-50"><i class="fa fa-envelope text-primary me-2"></i>sales@nowornever.com</p>
+                <p class="mb-2 text-white-50"><i class="fa fa-phone-alt text-primary me-2"></i>+250 7888 64 02</p>
+                <ul class="list-unstyled mt-3">
+                <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none"><i class="fa fa-shield-alt text-primary me-2"></i>Privacy Policy</a></li>
+                <li><a href="#" class="text-white-50 text-decoration-none"><i class="fa fa-file-contract text-primary me-2"></i>Terms &amp; Conditions</a></li>
+                </ul>
+            </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-secondary text-center py-3" style="background: #00000000 !important;">
+            <span class="text-white-50">&copy; <span class="fw-bold">Now or Never LTD</span>, All Rights Reserved.</span>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
