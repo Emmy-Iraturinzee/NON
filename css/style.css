@@ -297,7 +297,35 @@ body {
     }
 }
 
+/* Header Carousel Responsive Tweaks */
+        /* responsive tweaks for carousel: hide data-dots on small screens and make text span full width */
+        .owl-carousel-inner h1#autoTypeHeading { font-size: clamp(2rem, 5vw, 3.5rem); }
+        .owl-carousel-inner p { font-size: clamp(0.95rem, 2.2vw, 1.05rem); }
 
+        @media (max-width: 767px) {
+            /* Hide Owl carousel dots on small screens */
+            .owl-dots { display: none !important; }
+
+            /* Make the slide content take full width and increase padding for readability */
+            .owl-carousel-inner { padding: 28px 14px; }
+            .owl-carousel-inner .container { max-width: 100%; padding-left: 0; padding-right: 0; }
+            .owl-carousel-inner .row { margin-left: 0; margin-right: 0; }
+
+            /* Ensure heading and paragraph scale down nicely */
+            .owl-carousel-inner h1#autoTypeHeading { font-size: clamp(1.6rem, 6.6vw, 2.4rem); line-height: 1.05; }
+            .owl-carousel-inner p { font-size: 0.98rem; }
+
+            /* Hide decorative right-side image on small screens */
+            .woman-img-hero, .owl-carousel .col-md-2 { display: none !important; }
+
+            /* Make text column span full width */
+            .col-md-8.col-12 { width: 100%; max-width: 100%; flex: 0 0 100%; }
+
+            /* Adjust background media positioning for better crop on phones */
+            .owl-carousel-item picture img,
+            .owl-carousel-item picture video { object-position: center top; height: auto; min-height: 60vh; }
+        }
+       
 /*** Service ***/
 .service-item {
     box-shadow: 0 0 45px rgba(0, 0, 0, .08);
