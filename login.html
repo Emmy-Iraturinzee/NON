@@ -10,17 +10,18 @@
             --bg1:#031426;   /* deep blue */
             --bg2:#052b1f;   /* deep green */
             --card:#0f1724cc;
-            --accent:#16a34a; /* green */
-            --accent2:#36a3ff; /* blue */
+            --accent:#74a404; /* green */
+            --accent2:#1128B3; /* blue */
             --muted:#9aa7bd;
             --glass: rgba(255,255,255,0.04);
+            --on-accent:#04203a; /* text color on green */
             font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
         }
 
         html,body{height:100%;}
         body{
             margin:0;
-            background: linear-gradient(135deg,var(--bg1),var(--bg2));
+            background:rgb(255, 255, 255);
             color:#e6eef8;
             -webkit-font-smoothing:antialiased;
             -moz-osx-font-smoothing:grayscale;
@@ -94,13 +95,30 @@
         .card{
             padding:28px;
             border-radius:14px;
-            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-            box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+            /* make the card match the green accent and ensure form content is visible */
+            background: linear-gradient(135deg, var(--accent) 0%, #74a404 100%);
+            /* local palette overrides so buttons inside this card become blue */
+            --accent: #1128B3;
+            --accent2: #1128B3;
+            --on-accent: #ffffff;
+            color: var(--on-accent);
+            box-shadow: 0 10px 30px rgba(2,6,23,0.35);
             backdrop-filter: blur(6px);
         }
 
+        /* ensure text inside card uses the on-accent color */
+        .card h2,
+        .card label,
+        .card .small,
+        .card .muted-link,
+        .card .helper,
+        .card .row,
+        .card p {
+            color: var(--on-accent);
+        }
+
         form{display:grid;gap:14px;}
-        label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px;}
+        label{font-size:13px;display:block;margin-bottom:6px;}
         .field{
             display:flex;
             flex-direction:column;
@@ -108,18 +126,19 @@
         input[type="email"],
         input[type="password"]{
             appearance:none;
-            border:1px solid rgba(255,255,255,0.06);
-            background:transparent;
-            color:var(--accent2);
+            border:1px solid rgba(4,32,58,0.08);
+            background: rgba(255,255,255,0.95);
+            color:#000; /* make user input visible and black */
             padding:12px 14px;
             border-radius:10px;
             outline:none;
             font-size:15px;
             transition: border-color .15s, box-shadow .15s;
         }
+        input::placeholder{ color: rgba(0,0,0,0.35); }
         input:focus{
-            border-color: rgba(54,163,255,0.9);
-            box-shadow: 0 6px 20px rgba(54,163,255,0.06);
+            border-color: rgba(4,32,58,0.2);
+            box-shadow: 0 6px 20px rgba(4,32,58,0.06);
         }
 
         .row{
@@ -128,7 +147,6 @@
             align-items:center;
             gap:12px;
             font-size:13px;
-            color:var(--muted);
         }
 
         .actions{
@@ -148,20 +166,20 @@
             cursor:pointer;
             border:0;
             background: linear-gradient(90deg,var(--accent),var(--accent2));
-            color:#04203a;
-            box-shadow: 0 8px 24px rgba(16,90,70,0.16);
+            color: var(--on-accent);
+            box-shadow: 0 8px 24px rgba(16,90,70,0.12);
             transition:transform .08s ease, box-shadow .08s ease, opacity .08s;
             text-decoration:none;
         }
         .btn.secondary{
-            background:transparent;
-            color:var(--muted);
-            border:1px solid rgba(255,255,255,0.04);
+            background: rgba(255,255,255,0.12);
+            color: var(--on-accent);
+            border:1px solid rgba(4,32,58,0.06);
         }
         .btn:active{transform:translateY(1px);}
 
         .small{
-            font-size:13px;color:var(--muted);
+            font-size:13px;
         }
 
         .social{
@@ -172,11 +190,11 @@
             flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer;
         }
 
-        .muted-link{color:var(--muted);text-decoration:none;}
+        .muted-link{ text-decoration:none; color: rgba(4,32,58,0.95); }
         .muted-link:hover{text-decoration:underline}
 
         .helper{
-            color:#ffb4a2;font-size:13px;margin-top:6px;display:none;
+            color: rgba(4,32,58,0.9); font-size:13px;margin-top:6px;display:none;
         }
 
         /* small screens */
@@ -188,12 +206,10 @@
     </style>
 </head>
 <body>
-    <main class="container" role="main">
-    
-
-        <section class="card text-center" aria-labelledby="signin-title">
-            <h2 id="signin-title" style="margin:0 0 8px 0;font-size:18px;color:#fff">Sign in</h2>
-            <p class="small" style="margin-bottom:14px;color:var(--muted)">Use your account to access the application</p>
+    <main role="main" style="width:100%;display:flex;align-items:center;justify-content:center;padding:24px;">
+        <section class="card" aria-labelledby="signin-title" style="width:100%;max-width:420px;">
+            <h2 id="signin-title" style="margin:0 0 8px 0;font-size:18px;color:inherit">Sign in</h2>
+            <p class="small" style="margin-bottom:14px;color:inherit">Use your account to access the application</p>
 
             <form id="loginForm" novalidate>
                 <div class="field">
@@ -205,26 +221,24 @@
                 <div class="field" style="position:relative;">
                     <label for="password">Password</label>
                     <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required minlength="6">
-                    <button type="button" id="togglePwd" aria-label="Show password" title="Show password" style="position:absolute;right:10px;top:36px;background:transparent;border:0;color:var(--muted);cursor:pointer;font-size:13px;">Show</button>
+                    <button type="button" id="togglePwd" aria-label="Show password" title="Show password" style="position:absolute;right:10px;top:36px;background:transparent;border:0;color:var(--on-accent);cursor:pointer;font-size:13px;">Show</button>
                     <div class="helper" id="pwdHelp">Passwords must be at least 6 characters</div>
                 </div>
 
-                <div class="row" style="margin-top:2px;"></div>
-                    <label style="display:flex;align-items:center;gap:8px;font-weight:500"></label>
-                        <input id="remember" name="remember" type="checkbox" style="width:16px;height:16px;border-radius:4px;">
-                        <span style="font-weight:600;color:var(--muted);font-size:13px">Remember me</span>
+                <div class="row" style="margin-top:6px;"></div>
+                    <label style="display:flex;align-items:center;gap:8px;font-weight:500;color:var(--on-accent)"></label>
+                        <input id="remember" name="remember" type="checkbox" style="width:16px;height:16px;border-radius:4px;margin-right:8px;">
+                        <span style="font-weight:600;font-size:13px">Remember me</span>
                     </label>
                     <a class="muted-link" href="#" id="forgot">Forgot password?</a>
                 </div>
 
-                <div class="actions"></div>
+                <div class="actions" style="margin-top:12px;">
                     <button class="btn" type="submit">Sign in</button>
                     <button class="btn secondary" type="button" id="signup">Create account</button>
                 </div>
 
-           
-
-                <p class="small" style="margin-top:12px;color:var(--muted)">By continuing you agree to our <a class="muted-link" href="#">Terms</a> and <a class="muted-link" href="#">Privacy Policy</a>.</p>
+                <p class="small" style="margin-top:12px;color:inherit">By continuing you agree to our <a class="muted-link" href="#">Terms</a> and <a class="muted-link" href="#">Privacy Policy</a>.</p>
             </form>
         </section>
     </main>
