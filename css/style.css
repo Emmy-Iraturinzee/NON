@@ -639,10 +639,11 @@ body {
     margin-bottom: 5px;
     padding: 0;
     text-align: left;
-    color: #9B9B9B;
-    font-weight: normal;
+    color: #ffffff !important;
+    font-weight: lighter !important;
     text-transform: capitalize;
     transition: .3s;
+
 }
 
 .footer .btn.btn-link::before {
