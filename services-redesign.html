@@ -1,0 +1,275 @@
+<!-- REDESIGNED SERVICES SECTION - Replace lines 924-1046 in index.html with this content -->
+
+<!-- Products Section Start -->
+<div class="container-fluid overflow-hidden my-5 px-lg-0" id="services" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+  <div class="container py-5">
+    <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
+      <h6 class="text-primary mt-3">Our Services</h6>
+      <h1 class="display-5 mb-3 fw-bold">Comprehensive IT Solutions</h1>
+      <p class="text-muted">Empowering your business with cutting-edge technology and expert consulting</p>
+    </div>
+
+    <!-- Main IT Consulting Hero Card -->
+    <div class="row justify-content-center mb-5 wow fadeInUp" data-wow-delay="0.2s">
+      <div class="col-lg-10">
+        <div class="position-relative overflow-hidden" style="border-radius:20px; box-shadow:0 10px 40px rgba(0,0,0,0.12);">
+          <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=400&fit=crop" 
+               alt="IT Consulting" 
+               style="width:100%; height:300px; object-fit:cover; opacity:0.9;">
+          <div class="position-absolute top-0 start-0 w-100 h-100" 
+               style="background: linear-gradient(135deg, rgba(17,40,179,0.92) 0%, rgba(116,164,4,0.88) 100%);">
+            <div class="d-flex flex-column justify-content-center h-100 px-4 px-lg-5 text-white">
+              <h2 class="display-6 fw-bold mb-3">IT Consulting Excellence</h2>
+              <p class="lead mb-3" style="max-width:900px;">
+                We help organizations unlock the full potential of technology through tailored IT consulting solutions. 
+                Our expertise covers the integration of digital interventions into sector-specific programs, ensuring 
+                technology drives measurable impact across industries.
+              </p>
+              <p class="mb-4" style="max-width:900px;">
+                Our team conducts comprehensive IT audits, ensuring compliance, security, and quality assurance in every 
+                system we support. We also provide training and capacity building programs to empower teams with the skills 
+                needed to manage digital transformation effectively.
+              </p>
+              <div>
+                <a href="#about" class="btn btn-light btn-lg px-5 py-3" style="border-radius:50px;">
+                  Explore Our Services <i class="fa fa-arrow-right ms-2"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scrollable Services Cards Section -->
+    <div class="wow fadeInUp" data-wow-delay="0.3s">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="mb-0">Our Core Capabilities</h3>
+        <div class="d-none d-md-block text-muted">
+          <i class="fa fa-arrow-left me-2"></i> Scroll to explore <i class="fa fa-arrow-right ms-2"></i>
+        </div>
+      </div>
+
+      <style>
+        .services-scroll-container {
+          overflow-x: auto;
+          overflow-y: hidden;
+          white-space: nowrap;
+          padding: 20px 0;
+          margin: 0 -15px;
+          scroll-behavior: smooth;
+          -webkit-overflow-scrolling: touch;
+        }
+        .services-scroll-container::-webkit-scrollbar {
+          height: 8px;
+        }
+        .services-scroll-container::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 10px;
+        }
+        .services-scroll-container::-webkit-scrollbar-thumb {
+          background: #74a404;
+          border-radius: 10px;
+        }
+        .services-scroll-container::-webkit-scrollbar-thumb:hover {
+          background: #5a8003;
+        }
+        .service-card-scroll {
+          display: inline-block;
+          width: 340px;
+          margin: 0 15px;
+          white-space: normal;
+          vertical-align: top;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card-scroll:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 15px 40px rgba(0,0,0,0.15) !important;
+        }
+        .service-img-wrapper {
+          position: relative;
+          height: 200px;
+          overflow: hidden;
+          border-radius: 16px 16px 0 0;
+        }
+        .service-img-wrapper img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.4s ease;
+        }
+        .service-card-scroll:hover .service-img-wrapper img {
+          transform: scale(1.1);
+        }
+        .service-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 100%);
+          display: flex;
+          align-items: flex-end;
+          padding: 20px;
+        }
+        .service-icon-badge {
+          width: 50px;
+          height: 50px;
+          background: #fff;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .service-card-body {
+          background: #fff;
+          padding: 25px;
+          border-radius: 0 0 16px 16px;
+        }
+        @media (max-width: 768px) {
+          .service-card-scroll {
+            width: 300px;
+          }
+        }
+      </style>
+
+      <div class="services-scroll-container">
+        <!-- Card 1: Data & Analytics -->
+        <article class="service-card-scroll" style="box-shadow: 0 8px 24px rgba(0,0,0,0.08);">
+          <div class="service-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop" 
+                 alt="Data Analytics">
+            <div class="service-overlay">
+              <div class="service-icon-badge">
+                <i class="fa fa-chart-line" style="font-size:1.5rem; color:#74a404;"></i>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-body">
+            <h5 class="fw-bold mb-3">Data, Advanced Analytics & Data Science</h5>
+            <p class="text-muted mb-0" style="font-size: 0.92rem; line-height: 1.6;">
+              We help businesses turn data into strategic assets. Our experts harness advanced analytics, AI, and data science 
+              to uncover insights, optimize operations, and drive growth. From data strategy and visualization to predictive 
+              modeling and machine learning, we empower decision-makers with real-time intelligence.
+            </p>
+          </div>
+        </article>
+
+        <!-- Card 2: Emerging Technologies -->
+        <article class="service-card-scroll" style="box-shadow: 0 8px 24px rgba(0,0,0,0.08);">
+          <div class="service-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop" 
+                 alt="Emerging Technologies">
+            <div class="service-overlay">
+              <div class="service-icon-badge">
+                <i class="fa fa-robot" style="font-size:1.5rem; color:#1128B3;"></i>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-body">
+            <h5 class="fw-bold mb-2">Emerging Technologies</h5>
+            <h6 class="text-primary mb-3">AI, Blockchain, IoT & Cloud</h6>
+            <p class="text-muted mb-0" style="font-size: 0.92rem; line-height: 1.6;">
+              We help businesses stay ahead in the digital era by integrating cutting-edge technologies such as Artificial 
+              Intelligence, Blockchain, Internet of Things (IoT), and Cloud Computing. Our solutions drive innovation, 
+              improve efficiency, and create competitive advantages for sustainable growth.
+            </p>
+          </div>
+        </article>
+
+        <!-- Card 3: IT Audit -->
+        <article class="service-card-scroll" style="box-shadow: 0 8px 24px rgba(0,0,0,0.08);">
+          <div class="service-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=250&fit=crop" 
+                 alt="IT Audit">
+            <div class="service-overlay">
+              <div class="service-icon-badge">
+                <i class="fa fa-clipboard-check" style="font-size:1.5rem; color:#74a404;"></i>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-body">
+            <h5 class="fw-bold mb-3">IT Audit, Compliance & Quality Assurance</h5>
+            <p class="text-muted mb-0" style="font-size: 0.92rem; line-height: 1.6;">
+              We help businesses strengthen their digital integrity through comprehensive IT audits, compliance checks, 
+              and quality assurance. Our experts assess your systems, identify risks, and ensure alignment with global 
+              standards—enhancing security, reliability, and performance.
+            </p>
+          </div>
+        </article>
+
+        <!-- Card 4: Cloud & Cybersecurity -->
+        <article class="service-card-scroll" style="box-shadow: 0 8px 24px rgba(0,0,0,0.08);">
+          <div class="service-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=250&fit=crop" 
+                 alt="Cloud & Cybersecurity">
+            <div class="service-overlay">
+              <div class="service-icon-badge">
+                <i class="fa fa-shield-alt" style="font-size:1.5rem; color:#1128B3;"></i>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-body">
+            <h5 class="fw-bold mb-3">Cloud Computing & Cybersecurity</h5>
+            <p class="text-muted mb-0" style="font-size: 0.92rem; line-height: 1.6;">
+              Empower your business with secure, scalable, and efficient digital infrastructure. Our cloud solutions help 
+              companies streamline operations, enhance collaboration, and reduce IT costs. Combined with advanced 
+              cybersecurity services, we protect your data, systems, and digital assets from evolving threats.
+            </p>
+          </div>
+        </article>
+
+        <!-- Card 5: Training -->
+        <article class="service-card-scroll" style="box-shadow: 0 8px 24px rgba(0,0,0,0.08);">
+          <div class="service-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&h=250&fit=crop" 
+                 alt="Training & Capacity Building">
+            <div class="service-overlay">
+              <div class="service-icon-badge">
+                <i class="fa fa-graduation-cap" style="font-size:1.5rem; color:#74a404;"></i>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-body">
+            <h5 class="fw-bold mb-3">Training & Capacity Building</h5>
+            <p class="text-muted mb-0" style="font-size: 0.92rem; line-height: 1.6;">
+              We empower organizations with practical, results-driven training programs that enhance digital skills, 
+              leadership, and operational excellence. Our tailored courses in IT systems, data management, and modern 
+              management practices equip teams to adapt, innovate, and perform efficiently.
+            </p>
+          </div>
+        </article>
+
+        <!-- Card 6: IT Support -->
+        <article class="service-card-scroll" style="box-shadow: 0 8px 24px rgba(0,0,0,0.08);">
+          <div class="service-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=250&fit=crop" 
+                 alt="IT Technical Support">
+            <div class="service-overlay">
+              <div class="service-icon-badge">
+                <i class="fa fa-headset" style="font-size:1.5rem; color:#1128B3;"></i>
+              </div>
+            </div>
+          </div>
+          <div class="service-card-body">
+            <h5 class="fw-bold mb-3">IT Technical Support</h5>
+            <p class="text-muted mb-0" style="font-size: 0.92rem; line-height: 1.6;">
+              Keep your business running smoothly with our reliable IT technical support services. We provide fast, 
+              proactive assistance to resolve technical issues, optimize system performance, and ensure uninterrupted 
+              operations — from troubleshooting and maintenance to network security and user support.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="text-center mt-5 wow fadeInUp" data-wow-delay="0.4s">
+      <a href="service.html" class="btn btn-lg px-5 py-3" 
+         style="background:#74a404; color:#fff; border-radius:50px; font-weight:600;">
+        View All Services <i class="fa fa-arrow-right ms-2"></i>
+      </a>
+    </div>
+  </div>
+</div>
