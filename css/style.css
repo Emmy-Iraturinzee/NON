@@ -617,12 +617,14 @@ body {
 
 /*** Footer ***/
 .footer{
-    background-color: #1128B3;
+    background: linear-gradient(135deg, #7ED321 0%, #1128B3 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .footer .btn.btn-social {
     margin-right: 5px;
-    color: var(--primary);
-    border: 1px solid var(--primary);
+    color: white;
+    border: 1px solid white;
     border-radius: 38px;
     transition: .3s;
     background-color: transparent;
