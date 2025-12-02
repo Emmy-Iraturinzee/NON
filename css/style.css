@@ -674,8 +674,95 @@ body {
 .footer .copyright a:hover {
     color: var(--primary);
 }
-
-
+/* team */
+        .team-card {
+                    background: #fff;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+                    transition: transform 0.3s, box-shadow 0.3s;
+                }
+                .team-card:hover {
+                    transform: translateY(-10px);
+                    box-shadow: 0 12px 30px rgba(116, 164, 4, 0.15);
+                }
+                .team-image-wrapper {
+                    position: relative;
+                    overflow: hidden;
+                    height: 280px;
+                }
+                .team-image {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                .team-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: rgba(116, 164, 4, 0.9);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                }
+                .team-card:hover .team-overlay {
+                    opacity: 1;
+                }
+                .social-links {
+                    display: flex;
+                    gap: 12px;
+                }
+                .social-icon {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background: #fff;
+                    color: #74a404;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: transform 0.2s;
+                    text-decoration: none;
+                }
+                .social-icon:hover {
+                    transform: scale(1.1);
+                }
+                .team-info {
+                    padding: 20px;
+                    text-align: center;
+                }
+                .team-info h4 {
+                    margin-bottom: 6px;
+                    font-weight: 700;
+                    color: #333;
+                }
+                .role {
+                    color: #74a404;
+                    font-size: 0.9rem;
+                    margin-bottom: 12px;
+                }
+                .contact-info {
+                    display: flex;
+                    gap: 10px;
+                    justify-content: center;
+                }
+                .contact-info a {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    background: #f0f0f0;
+                    color: #74a404;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: background 0.2s;
+                    text-decoration: none;
+                }
+                .contact-info a:hover {
+                    background: #74a404;
+                    color: #fff;
+                }
 /* card inteaction */
  
                         .stack-card-modern {
