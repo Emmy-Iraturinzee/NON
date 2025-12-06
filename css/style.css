@@ -617,7 +617,7 @@ body {
 
 /*** Footer ***/
 .footer{
-    background: linear-gradient(135deg, #7ED321 0%, #1128B3 100%);
+    background:#1128B3;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -646,6 +646,12 @@ body {
     text-transform: capitalize;
     transition: .3s;
 
+}
+.footer p{
+   margin-bottom: 10px !important;
+}
+.footer li a{
+    margin-bottom: 10px !important ;
 }
 
 .footer .btn.btn-link::before {
