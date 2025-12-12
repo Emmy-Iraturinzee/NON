@@ -46,182 +46,265 @@
 
 
     <!-- Navbar Start -->
-   <nav id="mainNavbar" class="navbar navbar-expand-lg navbar-light sticky-top p-0" style="background: white; transition: background 0.3s;">
-        <a href="index.html" class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
+<nav id="mainNavbar" class="navbar navbar-expand-lg box-shadow navbar-light sticky-top p-0" style="background: white; transition: background 0.3s; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+    <a href="index.html" class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
       <img src="img/logo_non-removebg-preview.png" alt="Now or Never LTD Logo" style="height: 100px;">
-        </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link ">Home</a>
-                <a href="index.html" class="nav-item nav-link">About</a>
-                <a href="" class="nav-item nav-link active">Our Service</a>
-                <a href="" class="nav-item nav-link">Our Products</a>
-                <!-- Login Button in Navbar -->
-                <!-- <a href="#" id="loginLink" class="nav-item nav-link">Login</a> -->
-                <!-- <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu bg-light m-0">
-                        <a href="feature.html" class="dropdown-item">Feature</a>
-                        <a href="quote.html" class="dropdown-item">Free Quote</a>
-                        <a href="team.html" class="dropdown-item">Our Team</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                        <a href="404.html" class="dropdown-item">404 Page</a>
-                    </div>
-                </div> -->
-                <a href="contact.html" class="nav-item nav-link">Blog</a>
-                            <!-- Search icon in navbar -->
-                            <a href="#" id="navSearchBtn" class="nav-item nav-link" role="button" aria-label="Open search" style="cursor:pointer;">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </a>
-
-                            <!-- Floating search + overlay (placed inside navbar collapse so it loads with the page) -->
-                            <div id="navSearchOverlay" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,0.6); align-items:center; justify-content:center; padding:20px; box-sizing:border-box;">
-                              <div id="navSearchBox" role="dialog" aria-modal="true" aria-label="Site search"
-                                   style="background:#fff; width:clamp(320px,70%,900px); margin:0 20px; border-radius:10px; padding:18px; box-shadow:0 10px 40px rgba(0,0,0,0.4);">
-                                <div style="display:flex; gap:8px; align-items:center;">
-                                  <input id="navSearchInput" type="search" placeholder="Search the site..." autofocus
-                                         style="flex:1; border:1px solid #e6e6e6; border-radius:8px; padding:12px 14px; font-size:1rem; outline:none;">
-                                  <button id="navSearchSubmit" class="btn btn-primary" style="padding:10px 14px; font-weight:600;">
-                                    <i class="fa fa-search"></i>
-                                  </button>
-                               
-                                </div>
-                              </div>
-                            </div>
-
-                      
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+            <a href="index.html" class="nav-item nav-link ">Home</a>
+            <a href="index.html" class="nav-item nav-link">About</a>
+            <a href="" class="nav-item nav-link active">Our Service</a>
+            <a href="" class="nav-item nav-link">Our Products</a>
+            <a href="contact.html" class="nav-item nav-link">Blog</a>
+            <a href="#" id="navSearchBtn" class="nav-item nav-link" role="button" aria-label="Open search" style="cursor:pointer;">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            <div id="navSearchOverlay" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,0.6); align-items:center; justify-content:center; padding:20px; box-sizing:border-box;">
+              <div id="navSearchBox" role="dialog" aria-modal="true" aria-label="Site search"
+                   style="background:#fff; width:clamp(320px,70%,900px); margin:0 20px; border-radius:10px; padding:18px; box-shadow:0 10px 40px rgba(0,0,0,0.4);">
+                <div style="display:flex; gap:8px; align-items:center;">
+                  <input id="navSearchInput" type="search" placeholder="Search the site..." autofocus
+                         style="flex:1; border:1px solid #e6e6e6; border-radius:8px; padding:12px 14px; font-size:1rem; outline:none;">
+                  <button id="navSearchSubmit" class="btn btn-primary" style="padding:10px 14px; font-weight:600;">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+              </div>
             </div>
-            
-            <a href="contact.html" class="btn   py-4 px-lg-5 d-none d-lg-block" style="font-size: 12px; background-color: #74a404; color: white;"  >CONTACT US<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
-    </nav>
+        <a href="contact.html" class="btn py-4 px-lg-5 d-none d-lg-block" style="font-size: 12px; background-color: #74a404; color: white;">CONTACT US<i class="fa fa-arrow-right ms-3"></i></a>
+    </div>
+</nav>
     <!-- Navbar End -->
 
 <div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
-      
-        
-        
-
-        <div class="row">
-            <!-- Sidebar - Table of Contents -->
-            <div class="col-lg-3">
-                <div style="background: #e6f2ff; padding: 25px; border-radius: 8px; position: sticky; top: 20px;">
-                    <h6 style="color: #003d82; font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; margin-bottom: 20px;">TABLE OF CONTENT</h6>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="margin-bottom: 15px;"><a href="#privacy-policy" style="color: #000; text-decoration: none; font-weight: 600;">Privacy Policy</a></li>
-                        <li style="margin-bottom: 15px;"><a href="#data-processing" style="color: #000; text-decoration: none;">Data Processing Agreement</a></li>
-                        <li style="margin-bottom: 15px;"><a href="#ccpa" style="color: #000; text-decoration: none;">CCPA</a></li>
-                        <li style="margin-bottom: 15px;"><a href="#terms" style="color: #000; text-decoration: none;">Terms of Use</a></li>
-                        <li style="margin-bottom: 15px;"><a href="#cookies" style="color: #000; text-decoration: none;">Cookie Settings</a></li>
-                        <li><a href="#accessibility" style="color: #000; text-decoration: none;">Accessibility Statement</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Main Content -->
-            <div class="col-lg-9 ps-lg-4">
-                <!-- Section 1 -->
-                <div id="privacy-policy" style="margin-bottom: 50px; padding-bottom: 30px; border-bottom: 2px solid #4caf50;">
-                    <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                        <span style="background: #2196F3; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-right: 15px;">1</span>
-                        <h2 style="color: #003d82; margin: 0; font-size: 28px; font-weight: 700;">Privacy Policy</h2>
-                    </div>
-                    <p style="color: #000; line-height: 1.8; margin-bottom: 15px;"><strong>Effective Date:</strong> February 20, 2024</p>
-                    <p style="color: #000; line-height: 1.8;">Now or Never LTD, its subsidiaries and affiliates are committed to upholding the privacy rights of individuals. We provide this Privacy Policy to let you know our policies and procedures regarding the collection, use and disclosure of Personal Information from Users of our website and services.</p>
-                </div>
-
-                <!-- Section 2 -->
-                <div id="data-processing" style="margin-bottom: 50px; padding-bottom: 30px; border-bottom: 2px solid #4caf50;">
-                    <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                        <span style="background: #4caf50; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-right: 15px;">2</span>
-                        <h2 style="color: #003d82; margin: 0; font-size: 28px; font-weight: 700;">When and How We Collect Data</h2>
-                    </div>
-                    <p style="color: #000; line-height: 1.8;">We collect data when you create an account, make a purchase, or interact with our services through forms, cookies, and tracking pixels.</p>
-                </div>
-
-                <!-- Section 3 -->
-                <div id="ccpa" style="margin-bottom: 50px; padding-bottom: 30px; border-bottom: 2px solid #4caf50;">
-                    <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                        <span style="background: #2196F3; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-right: 15px;">3</span>
-                        <h2 style="color: #003d82; margin: 0; font-size: 28px; font-weight: 700;">What Types of Data We Collect</h2>
-                    </div>
-                    <p style="color: #000; line-height: 1.8;">Name, email, phone, payment details, browsing history, IP address, and device information.</p>
-                </div>
-
-                <!-- Section 4 -->
-                <div id="terms" style="margin-bottom: 50px; padding-bottom: 30px; border-bottom: 2px solid #4caf50;">
-                    <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                        <span style="background: #4caf50; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-right: 15px;">4</span>
-                        <h2 style="color: #003d82; margin: 0; font-size: 28px; font-weight: 700;">Why We Collect Your Data</h2>
-                    </div>
-                    <p style="color: #000; line-height: 1.8;">To provide services, improve experience, process transactions, send communications, and comply with legal obligations.</p>
-                </div>
-
-                <!-- Section 5 -->
-                <div id="cookies" style="margin-bottom: 50px; padding-bottom: 30px; border-bottom: 2px solid #4caf50;">
-                    <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                        <span style="background: #2196F3; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-right: 15px;">5</span>
-                        <h2 style="color: #003d82; margin: 0; font-size: 28px; font-weight: 700;">Your Privacy Rights</h2>
-                    </div>
-                    <p style="color: #000; line-height: 1.8;">You have the right to access, modify, or delete your data. Opt-out of marketing communications anytime through your account settings.</p>
-                </div>
-
-                <!-- Section 6 -->
-                <div id="accessibility" style="margin-bottom: 50px;">
-                    <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                        <span style="background: #4caf50; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-right: 15px;">6</span>
-                        <h2 style="color: #003d82; margin: 0; font-size: 28px; font-weight: 700;">Privacy of Children</h2>
-                    </div>
-                    <p style="color: #000; line-height: 1.8;">Our services are not intended for children under 13. We do not knowingly collect data from children.</p>
-                </div>
+    <div class="container" style="max-width: 1100px; margin: 50px auto;">
+    
+    <div class="" style="margin-bottom: 50px ;">
+            <h2 >Privacy Policy</h2>
+    </div>
+        <div class="accordion">
+            <button class="accordion-header active" onclick="toggleAccordion(this)">
+            <span>1. When and how we collect data</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            </button>
+            <div class="accordion-content show">
+            <p>We collect data when you create an account, make a purchase, or interact with our services. Data is collected through forms, cookies, and tracking pixels on our website.</p>
             </div>
         </div>
+
+        <div class="accordion">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>2. What types of data we collect</span>
+                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="accordion-content">
+                <p>We collect personal information including name, email address, phone number, payment details, browsing history, IP address, and device information for service improvement and security purposes.</p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>3. Why we collect your data</span>
+                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="accordion-content">
+                <p>Data is collected to provide services, improve user experience, process transactions, send communications, analyze usage patterns, and comply with legal obligations.</p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>4. Your privacy rights</span>
+                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="accordion-content">
+                <p>You have the right to access, modify, or delete your personal data. You can opt-out of marketing communications and request data portability at any time through your account settings.</p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>5. Privacy of Children</span>
+                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="accordion-content">
+                <p>Our services are not intended for children under 13. We do not knowingly collect data from children and will delete any such information immediately upon discovery.</p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>6. How long do we store your data</span>
+                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="accordion-content">
+                <p>We retain personal data for as long as necessary to provide services or comply with legal requirements. Most data is deleted within 2 years of account inactivity.</p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>7. How we store your data</span>
+                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="accordion-content">
+                <p>Data is stored on encrypted servers with advanced security measures. We use firewalls, SSL protocols, and regular security audits to protect your information from unauthorized access.</p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>8. Third parties who process your data</span>
+                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="accordion-content">
+                <p>Your data may be shared with payment processors, analytics providers, and service vendors. All third parties are bound by data protection agreements and comply with privacy laws.</p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>9. More Information on cookies</span>
+                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="accordion-content">
+                <p>We use cookies for authentication, preferences, and analytics. You can control cookie settings in your browser. Essential cookies cannot be disabled as they are required for site functionality.</p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>10. Sharing of personal information</span>
+                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="accordion-content">
+                <p>We do not sell your personal information. Sharing occurs only with your consent, for service delivery, or when legally required. You can control sharing preferences in your privacy settings.</p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+                <span>11. How to contact us</span>
+                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="accordion-content">
+                <p>For privacy inquiries, contact us at privacy@nowornever.com or mail to: Privacy Team, KN 3RD, 2nd Floor Kigali, Rwanda. Response time is typically 5-7 business days.</p>
+            </div>
+        </div>
+
+        <script>
+            function toggleAccordion(button) {
+                const content = button.nextElementSibling;
+                button.classList.toggle('active');
+                content.classList.toggle('show');
+            }
+        </script>
+     
+         <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+          
+            h1 {
+                color: #1a1a2e;
+                margin-bottom: 40px;
+                font-size: 2.5em;
+                font-weight: 600;
+            }
+            .accordion {
+                background-color: white;
+                margin-bottom: 12px;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                overflow: hidden;
+            }
+            .accordion:hover {
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            }
+            .accordion-header {
+                padding: 20px;
+                background-color: white;
+                color: #1a1a2e;
+                cursor: pointer;
+                border: none;
+                width: 100%;
+                text-align: left;
+                font-size: 16px;
+                font-weight: 600;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                transition: all 0.3s ease;
+            }
+            .accordion-header:hover {
+                background-color: #f8f9fa;
+            }
+            .accordion-header.active {
+                color: #0066ff;
+            }
+            .chevron {
+                width: 24px;
+                height: 24px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform 0.3s ease;
+                flex-shrink: 0;
+                margin-left: 12px;
+                stroke: #28a745;
+            }
+            .accordion-header.active .chevron {
+                transform: rotate(180deg);
+            }
+            .accordion-content {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+            }
+            .accordion-content.show {
+                max-height: 500px;
+                padding: 20px;
+                padding-top: 0;
+            }
+            .accordion-content p {
+                color: #555;
+                line-height: 1.8;
+                font-size: 15px;
+            }
+        </style>
     </div>
 </div>
 <div class="container-fluid  text-body footer  pt-5 wow fadeIn" data-wow-delay="0.1s" >
-        <!-- Spacer -->
-        <div style="height: 40px;"></div>
-        <style>
-            body {
-                background-color: #000;
-                color: #fff;
-            }
-            .navbar {
-                background-color: #000 !important;
-            }
-            .navbar-brand, .nav-link {
-                color: #fff !important;
-            }
-            .btn-primary {
-                background-color: #333;
-                border-color: #333;
-            }
-            .footer {
-                background-color: #000 !important;
-            }
-            h1, h2, h3, h4, h5, h6 {
-                color: #fff !important;
-            }
-            p, span, a {
-                color: #fff !important;
-            }
-            #navSearchBox {
-                background-color: #1a1a1a !important;
-                color: #fff !important;
-            }
-            #navSearchInput {
-                background-color: #333 !important;
-                color: #fff !important;
-                border-color: #555 !important;
-            }
-            .container-fluid {
-                background-color: #000 !important;
-            }
-        </style>
         <div class="container py-5">
             <div class="row g-5">
             <!-- About Company -->
