@@ -98,297 +98,63 @@
             <a href="contact.html" class="btn   py-4 px-lg-5 d-none d-lg-block" style="font-size: 12px; background-color: #74a404; color: white;"  >CONTACT US<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
-    <!-- Navbar End -->
+ <!-- Navbar End -->
 
-
-    <!-- Page Header Start -->
-    <div class="container-fluid page-header py-5 mb-5" style="position:relative;overflow:hidden;">
-  <canvas id="headerParticles" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
-
-        <div class="container py-5">
-            <h1 class="display-3 text-white mb-3 animated slideInDown">E-Agriculture</h1>
-            <nav aria-label="breadcrumb animated slideInDown">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                    <li class="breadcrumb-item text-white active" aria-current="page">IT Sector specific services</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-      <style>
-            /* optional subtle dark overlay so particles remain visible over images */
-            .page-header::after{
-                content: "";
-                position: absolute;
-                inset: 0;
-                background: rgba(0,0,0,0.18);
-                z-index: 0;
-                pointer-events: none;
-            }
-        </style>
-
-        <script>
-            (function(){
-                const canvas = document.getElementById('headerParticles');
-                if(!canvas) return;
-                const ctx = canvas.getContext('2d');
-
-                let width = 0, height = 0, particles = [];
-
-                function resize(){
-                    const dpr = window.devicePixelRatio || 1;
-                    width = canvas.clientWidth || canvas.width;
-                    height = canvas.clientHeight || canvas.height;
-                    canvas.width = Math.floor((canvas.offsetWidth) * dpr);
-                    canvas.height = Math.floor((canvas.offsetHeight) * dpr);
-                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-                    initParticles();
-                }
-
-                function rand(min, max){ return Math.random() * (max - min) + min; }
-
-                function initParticles(){
-                    particles = [];
-                    const area = (canvas.offsetWidth || 800) * (canvas.offsetHeight || 200);
-                    const count = Math.min(140, Math.max(30, Math.floor(area / 6000)));
-                    for(let i=0;i<count;i++){
-                        particles.push({
-                            x: rand(0, canvas.offsetWidth),
-                            y: rand(0, canvas.offsetHeight),
-                            r: rand(0.8, 3.2),
-                            vx: rand(-0.25, 0.25),
-                            vy: rand(-0.15, 0.15),
-                            alpha: rand(0.3, 0.9)
-                        });
-                    }
-                }
-
-                function step(){
-                    ctx.clearRect(0,0,canvas.offsetWidth, canvas.offsetHeight);
-
-                    // draw connections
-                    const threshold = 90;
-                    for(let i=0;i<particles.length;i++){
-                        const p = particles[i];
-                        for(let j=i+1;j<particles.length;j++){
-                            const q = particles[j];
-                            const dx = p.x - q.x;
-                            const dy = p.y - q.y;
-                            const dist = Math.sqrt(dx*dx + dy*dy);
-                            if(dist < threshold){
-                                const t = 1 - dist / threshold;
-                                ctx.strokeStyle = 'rgba(255,255,255,' + (0.08 * t) + ')';
-                                ctx.lineWidth = 1 * t;
-                                ctx.beginPath();
-                                ctx.moveTo(p.x, p.y);
-                                ctx.lineTo(q.x, q.y);
-                                ctx.stroke();
-                            }
-                        }
-                    }
-
-                    // draw particles and update
-                    for(const p of particles){
-                        p.x += p.vx;
-                        p.y += p.vy;
-
-                        // wrap around
-                        if(p.x < -10) p.x = canvas.offsetWidth + 10;
-                        if(p.x > canvas.offsetWidth + 10) p.x = -10;
-                        if(p.y < -10) p.y = canvas.offsetHeight + 10;
-                        if(p.y > canvas.offsetHeight + 10) p.y = -10;
-
-                        ctx.beginPath();
-                        ctx.fillStyle = 'rgba(255,255,255,' + p.alpha + ')';
-                        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-
-                    requestAnimationFrame(step);
-                }
-
-                // initialize when DOM ready
-                function init(){
-                    resize();
-                    window.addEventListener('resize', () => {
-                        // throttle resize with requestAnimationFrame
-                        if(this._resizeRAF) cancelAnimationFrame(this._resizeRAF);
-                        this._resizeRAF = requestAnimationFrame(resize);
-                    });
-                    requestAnimationFrame(step);
-                }
-
-                // If element sizes are not yet set, delay init slightly
-                if (document.readyState === 'loading') {
-                    document.addEventListener('DOMContentLoaded', init);
-                } else {
-                    init();
-                }
-            })();
-        </script>
-    <!-- Page Header End -->
-
-
-    <!-- Digital Solutions Section Start -->
-    <div class="container-fluid py-6 wow fadeIn" data-wow-delay="0.1s" >
-        <style>
-            /* Section-specific styles */
-            #eagri-section .feature-card {  overflow: hidden; transition: transform .35s ease, box-shadow .35s ease; }
-            #eagri-section .feature-card:hover { transform: translateY(-8px);  }
-            #eagri-section .img-zoom { transition: transform .6s ease; }
-            #eagri-section .img-zoom:hover { transform: scale(1.06); }
-            #eagri-section .pill { background: linear-gradient(90deg,#73b70e,#b7de34); color:#fff; padding:6px 12px; border-radius:999px; font-weight:700; display:inline-flex; align-items:center; gap:8px; }
-            #eagri-section .stat { font-size:1.9rem; font-weight:800; color:#2a6a05; }
-            #eagri-section .stat-label { color:#5b5b5b; font-size:.95rem; }
-            #eagri-section .read-more-toggle { cursor:pointer; color:#2a6a05; font-weight:600; text-decoration:underline; }
-            @media (max-width: 767px) {
-                #eagri-section .stat { font-size:1.5rem; }
-            }
-        </style>
-
-        <div id="eagri-section" class="container">
-            <div class="text-center mb-5">
-                <!-- <div class="pill mx-auto mb-3 mt-5"><i class="fas fa-seedling"></i> E-Agriculture</div> -->
-                <h2 class="fw-bold">Empowering Agriculture Through Digital Innovation</h2>
-                <p class="text-muted mx-auto" style="max-width:900px; font-size:1.05rem;">
-                    Unlock the full potential of farming with our E-Agriculture solutions. From real-time access to market information and digital marketplaces to remote learning tools and advanced data analytics, we equip farmers, agribusinesses, and cooperatives with the digital tools to grow smarter, trade efficiently, and make data-driven decisions. Transforming agriculture has never been this connected.
-                </p>
-            </div>
-
-            <div class="row g-4 align-items-stretch mb-5 mt-5">
-                <!-- Left: image collage / carousel -->
-                <div class="col-lg-6">
-                    <div id="eAgriCarousel" class="carousel slide feature-card h-100" data-bs-ride="carousel" data-bs-interval="4200" aria-label="Agriculture images carousel">
-                        <div class="carousel-inner h-100">
-                            <div class="carousel-item active h-100">
-                                <img src="img/ag-1.jpg" class="d-block w-100 img-fluid img-zoom" style="height:100%; object-fit:cover;" alt="Farmers in field">
-                            </div>
-                            <div class="carousel-item h-100">
-                                <img src="img/ag-2.jpg" class="d-block w-100 img-fluid img-zoom" style="height:100%; object-fit:cover;" alt="Market access">
-                            </div>
-                            <div class="carousel-item h-100">
-                                <img src="img/ag-3.jpg" class="d-block w-100 img-fluid img-zoom" style="height:100%; object-fit:cover;" alt="Agri technology">
-                            </div>
-                        </div>
-                        
+<!-- Agriculture Services Section Start -->
+<div class="container-fluid py-5" style="background: #ffffff;">
+        <div style="position: absolute; inset: 0; background: rgba(255, 255, 255, 0.5); z-index: -1;"></div>
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
+                <div style="position: relative; margin-bottom: 2rem;">
+                    <img src="img/agricul-mob.png" alt="Digital Agriculture Solutions" class="img-fluid rounded-lg" style="width: 100%; height: auto; display: block;">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%); border-radius: 0.5rem; display: flex; flex-direction: column; justify-content: center; padding: 2rem; color: white;">
+                        <h1 class="display-5 fw-bold mb-4 text-white">Digital Agriculture Solutions</h1>
+                        <p class="fs-5 mb-4">We integrate Information and Communication Technology (ICT) in agriculture and rural development to improve agricultural productivity, enhance food security, and promote sustainable practices through innovative digital solutions.</p>
                     </div>
-
-            
                 </div>
-
-                <!-- Right: content + features -->
-                <div class="col-lg-6">
-                    <style>
-                        /* Modernized right column styles (scoped) */
-                        #eagri-section .feature-card.modern { background: #ffffff; border-radius: 14px; padding: 22px; }
-                        #eagri-section .feature-list .icon {
-                            width:46px; height:46px; display:inline-flex; align-items:center; justify-content:center;
-                            border-radius:10px; color:#fff; margin-right:14px; flex-shrink:0;
-                            background: linear-gradient(135deg,#6fb90b 0%,#bfdc3a 100%);
-                            box-shadow: 0 6px 18px rgba(107,153,12,0.14);
-                        }
-                        #eagri-section .feature-item { display:flex; gap:0.5rem; align-items:flex-start; padding:12px 0; border-bottom:1px solid #f1f3f5; }
-                        #eagri-section .feature-item:last-child { border-bottom: none; }
-                        #eagri-section .feature-item h6 { margin:0; font-weight:700; color:#2a6a05; font-size:1rem; }
-                        #eagri-section .feature-item p { margin:4px 0 0; color:#6b6f76; font-size:0.95rem; }
-                        #eagri-section .stats-row { gap:12px; }
-                        #eagri-section .stat-card { background: linear-gradient(180deg,#f8fff0,#ffffff); border-radius:10px; padding:14px; text-align:center;  }
-                        #eagri-section .stat { font-size:1.6rem; font-weight:800; color:#2a6a05; }
-                        #eagri-section .stat-label { font-size:0.85rem; color:#6b6f76; margin-top:4px; display:block; }
-                    </style>
-
-                    <div class="feature-card modern h-100">
-                        <div class="d-flex flex-column h-100">
-                            <div class="mb-3">
-                                
-                                <h3 class="fw-bold mt-3" style="line-height:1.15;">Empowering farmers with data, markets, and skills</h3>
-                                <p class="text-muted mb-0">Smart tools that connect smallholders to market information, digital buyers, and on-demand learning — designed for scale and impact.</p>
-                            </div>
-
-                            <div class="feature-list mt-4">
-                                <div class="feature-item">
-                                    <div class="icon" aria-hidden="true"><i class="fas fa-info-circle"></i></div>
-                                    <div>
-                                        <h6>Timely Information</h6>
-                                        <p>Weather, advisory alerts and price signals delivered via responsive apps and SMS so farmers act faster and smarter.</p>
-                                    </div>
-                                </div>
-
-                                <div class="feature-item">
-                                    <div class="icon" aria-hidden="true"><i class="fas fa-store-alt"></i></div>
-                                    <div>
-                                        <h6>Digital Marketplaces</h6>
-                                        <p>Secure platforms to list produce, connect with buyers, and reduce costs by cutting out intermediaries.</p>
-                                    </div>
-                                </div>
-
-                                <div class="feature-item">
-                                    <div class="icon" aria-hidden="true"><i class="fas fa-chalkboard-teacher"></i></div>
-                                    <div>
-                                        <h6>Remote Learning</h6>
-                                        <p>Short courses, video guides and community groups to upskill farmers on sustainable practices and new tech.</p>
-                                    </div>
-                                </div>
-
-                                <div class="feature-item">
-                                    <div class="icon" aria-hidden="true"><i class="fas fa-chart-line"></i></div>
-                                    <div>
-                                        <h6>Actionable Analytics</h6>
-                                        <p>Crop monitoring and insights that help optimize inputs, reduce losses and improve yields.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        
-
-                          
-
-                            <div class="collapse mt-3" id="moreEAgri">
-                                <div class="card card-body border-0 px-3 py-2" style="background:#fbfef8;">
-                                    <p class="mb-1" style="color:#54585b;">We design low-bandwidth solutions, integrate local payment methods, and work with cooperatives to ensure adoption. Pilot programs are tailored by crop, region, and market channel for measurable results.</p>
-                                    <a href="contact.html" class="text-success fw-semibold" style="text-decoration:underline;">Request a pilot &raquo;</a>
-                                </div>
-                            </div>
-
+              
+            </div>
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="bg-white p-5 rounded-lg shadow-lg h-100" style="border-top: 4px solid #74a404;">
+                            <i class="bi bi-info-circle fs-1 text-success mb-3 d-block"></i>
+                            <h5 class="fw-bold mb-3">Agricultural Information</h5>
+                            <p class="text-muted">Access real-time data and insights to make informed decisions about crop management and resource allocation.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="bg-white p-5 rounded-lg shadow-lg h-100" style="border-top: 4px solid #74a404;">
+                            <i class="bi bi-shop fs-1 text-success mb-3 d-block"></i>
+                            <h5 class="fw-bold mb-3">Digital Marketplaces</h5>
+                            <p class="text-muted">Connect directly with buyers and sell your products at competitive prices without intermediaries.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="bg-white p-5 rounded-lg shadow-lg h-100" style="border-top: 4px solid #74a404;">
+                            <i class="bi bi-laptop fs-1 text-success mb-3 d-block"></i>
+                            <h5 class="fw-bold mb-3">Remote Learning</h5>
+                            <p class="text-muted">Learn modern farming techniques and best practices through accessible online courses and training.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="bg-white p-5 rounded-lg shadow-lg h-100" style="border-top: 4px solid #74a404;">
+                            <i class="bi bi-graph-up fs-1 text-success mb-3 d-block"></i>
+                            <h5 class="fw-bold mb-3">Data Analytics</h5>
+                            <p class="text-muted">Leverage agricultural data analytics for pest control, optimal yield prediction, and smart farming decisions.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <script>
-            // Simple counter animation when visible
-            (function() {
-                const stats = document.querySelectorAll('#eagri-section .stat');
-                if (!('IntersectionObserver' in window)) {
-                    stats.forEach(s => s.textContent = s.getAttribute('data-target'));
-                    return;
-                }
-                const easeOut = (t) => 1 - Math.pow(1 - t, 3);
-                const io = new IntersectionObserver((entries, obs) => {
-                    entries.forEach(entry => {
-                        if (!entry.isIntersecting) return;
-                        const el = entry.target;
-                        const target = parseInt(el.getAttribute('data-target') || '0', 10);
-                        const duration = 1400;
-                        const start = performance.now();
-                        requestAnimationFrame(function step(now) {
-                            const t = Math.min(1, (now - start) / duration);
-                            el.textContent = Math.floor(easeOut(t) * target).toLocaleString();
-                            if (t < 1) requestAnimationFrame(step);
-                        });
-                        obs.unobserve(el);
-                    });
-                }, { threshold: 0.4 });
-                stats.forEach(s => io.observe(s));
-            })();
-        </script>
     </div>
-    <!-- Digital Solutions Section End -->
-        
+</div>
+<!-- Agriculture Services Section End -->
 
-    <!-- Footer Start -->
+<!-- Main Content End -->
+
+<!-- Footer Start -->
 <div class="container-fluid  text-body footer  pt-5 wow fadeIn" data-wow-delay="0.1s" >
         <div class="container py-5">
             <div class="row g-5">
@@ -425,7 +191,6 @@
                 <ul class="list-unstyled mt-3">
                 <li class="mb-2" style="font-weight: lighter !important;"><a href="privacy_policy.html" class="text-white text-decoration-none"><i class="fa fa-shield-alt text-primary me-2"></i>Privacy Policy</a></li>
 
-                <li><a href="#" class="text-white text-decoration-none"style="font-weight: lighter !important;"><i class="fa fa-file-contract text-primary me-2"></i>Terms &amp; Conditions</a></li>
                 </ul>
             </div>
             </div>
@@ -434,9 +199,7 @@
             <span class="text-light" style="font-weight: lighter !important;">&copy; <span class="">Now or Never LTD</span>, All Rights Reserved.</span>
         </div>
     </div>
-    <!-- Footer End -->
-
-
+<!-- Footer End -->
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 
