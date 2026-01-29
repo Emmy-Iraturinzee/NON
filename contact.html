@@ -131,20 +131,20 @@
                         <h2 style="color: #74a404; font-weight: 700; font-size: 2.2rem; margin-bottom: 1rem;">Send us a Message</h2>
                         <p class="text-muted" style="font-size: 1rem;">Have questions? Our team is here to help you succeed.</p>
                     </div>
-                    <form id="contactForm2">
+                    <form id="contactForm2" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="First Name" style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px;">
+                                <input type="text" name="firstName" class="form-control" placeholder="First Name" style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px;" required>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Last Name" style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px;">
+                                <input type="text" name="lastName" class="form-control" placeholder="Last Name" style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px;" required>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Email Address" style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px;">
+                            <input type="email" name="email" class="form-control" placeholder="Email Address" style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px;" required>
                         </div>
                         <div class="mb-3">
-                            <select class="form-control" style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px;">
+                            <select name="service" class="form-control" style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px;" required>
                                 <option>Select Service</option>
                                 <option>Web Development</option>
                                 <option>App Development</option>
@@ -153,12 +153,23 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <textarea class="form-control" rows="4" placeholder="Tell us more..." style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px; resize: none;"></textarea>
+                            <textarea id="messageTextarea" name="message" class="form-control" rows="4" placeholder="Tell us more..." style="border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px; resize: none;" required></textarea>
+                            <small class="text-muted d-block mt-2"><span id="wordCount">0</span>/150 words</small>
                         </div>
                         <button type="submit" class="btn w-100" style="background: #74a404; color: white; padding: 14px; font-weight: 600; border-radius: 8px; border: none; transition: all 0.3s; cursor: pointer;">
                             Send Message <i class="fa fa-arrow-right ms-2"></i>
                         </button>
                     </form>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const textarea = document.getElementById('messageTextarea');
+                            const wordCount = document.getElementById('wordCount');
+                            textarea.addEventListener('input', function() {
+                                const words = this.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+                                wordCount.textContent = Math.min(words, 150);
+                            });
+                        });
+                    </script>
                 </div>
 
                 <!-- Right Side - Contact Info & Benefits -->
